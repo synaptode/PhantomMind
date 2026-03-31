@@ -1,20 +1,42 @@
 /**
  * PhantomMindAI — CLI Init Command
- * Interactive project initialization.
+ * Interactive project initialization with adapter & provider wizard.
  */
 
-import { writeFile, mkdir } from 'node:fs/promises';
+import { writeFile, mkdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import type { PhantomConfig, AdapterName, ProviderName } from '../types.js';
 import { getDefaultConfig } from '../config/loader.js';
+
+const ADAPTER_CHOICES: { value: AdapterName; name: string; description: string }[] = [
+  { value: 'copilot',     name: 'GitHub Copilot',  description: '.github/copilot-instructions.md' },
+  { value: 'cursor',      name: 'Cursor',          description: '.cursorrules' },
+  { value: 'cline',       name: 'Cline',           description: '.clinerules' },
+  { value: 'continue',    name: 'Continue',        description: '.continue/config.json' },
+  { value: 'windsurf',    name: 'Windsurf',        description: '.windsurfrules' },
+  { value: 'zed',         name: 'Zed',             description: '.zed/settings.json' },
+  { value: 'aider',       name: 'Aider',           description: '.aider.conf.yml' },
+  { value: 'claude-code', name: 'Claude Code CLI', description: '.claude/CLAUDE.md' },
+  { value: 'codex',       name: 'OpenAI Codex CLI', description: 'AGENTS.md' },
+];
+
+const PROVIDER_CHOICES: { value: ProviderName; name: string }[] = [
+  { value: 'anthropic',  name: 'Anthropic (Claude)' },
+  { value: 'openai',     name: 'OpenAI (GPT)' },
+  { value: 'gemini',     name: 'Google Gemini' },
+  { value: 'groq',       name: 'Groq' },
+  { value: 'mistral',    name: 'Mistral' },
+  { value: 'ollama',     name: 'Ollama (local)' },
+  { value: 'deepseek',   name: 'DeepSeek' },
+  { value: 'openrouter', name: 'OpenRouter' },
+];
 
 export interface InitOptions {
   adapters?: string[];
   provider?: string;
   model?: string;
   yes?: boolean;
-  interactive?: boolean;
 }
 
 export async function initCommand(
@@ -25,6 +47,51 @@ export async function initCommand(
   const ora = (await import('ora')).default;
 
   console.log(chalk.bold.cyan('\n🔮 PhantomMindAI — Project Initialization\n'));
+
+  // Interactive wizard unless --yes or all flags provided
+  const skipWizard = options.yes || (options.adapters && options.provider);
+  let selectedAdapters: AdapterName[] = (options.adapters as AdapterName[]) ?? [];
+  let selectedProvider: ProviderName = (options.provider as ProviderName) ?? 'anthropic';
+
+  if (!skipWizard) {
+    const inquirer = (await import('inquirer')).default;
+
+    // Step 1: Select AI tools
+    if (!options.adapters) {
+      const detected = detectAdapters(projectRoot);
+      const { adapters } = await inquirer.prompt<{ adapters: AdapterName[] }>([{
+        type: 'checkbox',
+        name: 'adapters',
+        message: 'Which AI tools do you use? (space to select, enter to confirm)',
+        choices: ADAPTER_CHOICES.map(a => ({
+          value: a.value,
+          name: `${a.name}  ${chalk.dim(a.description)}`,
+          checked: detected.includes(a.value),
+        })),
+        validate: (input: AdapterName[]) =>
+          input.length > 0 || 'Select at least one AI tool',
+      }]);
+      selectedAdapters = adapters;
+    }
+
+    // Step 2: Select primary LLM provider
+    if (!options.provider) {
+      const { provider } = await inquirer.prompt<{ provider: ProviderName }>([{
+        type: 'list',
+        name: 'provider',
+        message: 'Primary LLM provider:',
+        choices: PROVIDER_CHOICES,
+        default: 'anthropic',
+      }]);
+      selectedProvider = provider;
+    }
+
+    console.log('');
+  }
+
+  if (selectedAdapters.length === 0) {
+    selectedAdapters = getDefaultConfig().adapters;
+  }
 
   const spinner = ora('Setting up PhantomMindAI...').start();
 
@@ -47,34 +114,19 @@ export async function initCommand(
 
     spinner.text = 'Generating configuration...';
 
-    // Build config
+    // Build config with user selections
     const config: PhantomConfig = {
       ...getDefaultConfig(),
+      adapters: selectedAdapters,
+      providers: {
+        ...getDefaultConfig().providers,
+        primary: {
+          ...getDefaultConfig().providers.primary,
+          name: selectedProvider,
+          ...(options.model ? { model: options.model } : {}),
+        },
+      },
     };
-
-    if (options.provider) {
-      config.providers = {
-        ...config.providers,
-        primary: {
-          ...config.providers.primary,
-          name: options.provider as ProviderName,
-        },
-      };
-    }
-
-    if (options.model) {
-      config.providers = {
-        ...config.providers,
-        primary: {
-          ...config.providers.primary,
-          model: options.model,
-        },
-      };
-    }
-
-    if (options.adapters) {
-      config.adapters = options.adapters as AdapterName[];
-    }
 
     // Write config file
     const configPath = join(projectRoot, 'phantomind.config.json');
@@ -88,8 +140,9 @@ export async function initCommand(
     // Create SKILLS.md
     const skillsPath = join(phantomDir, 'SKILLS.md');
     if (!existsSync(skillsPath)) {
+      const projectName = detectProjectName(projectRoot);
       const skillsContent = [
-        `# ${detectProjectName(projectRoot)} — AI Skills & Context`,
+        `# ${projectName} — AI Skills & Context`,
         '',
         '> Auto-generated by PhantomMindAI. Customize to improve AI assistance.',
         '',
@@ -113,8 +166,9 @@ export async function initCommand(
     // Create RULES.md
     const rulesPath = join(phantomDir, 'RULES.md');
     if (!existsSync(rulesPath)) {
+      const projectName = detectProjectName(projectRoot);
       const rulesContent = [
-        `# ${detectProjectName(projectRoot)} — AI Rules`,
+        `# ${projectName} — AI Rules`,
         '',
         '> Auto-generated by PhantomMindAI. Customize to set boundaries.',
         '',
@@ -157,14 +211,18 @@ export async function initCommand(
       await writeFile(envExamplePath, envContent);
     }
 
+    const chalk2 = chalk;
     console.log('');
-    console.log(chalk.green('✅ PhantomMindAI initialized successfully!'));
+    console.log(chalk2.green('✅ PhantomMindAI initialized successfully!'));
     console.log('');
-    console.log(chalk.dim('Next steps:'));
-    console.log(chalk.dim(`  1. Copy ${chalk.white('.env.phantomind.example')} to ${chalk.white('.env.phantomind')} and add your API keys`));
-    console.log(chalk.dim(`  2. Customize ${chalk.white('.phantomind/SKILLS.md')} with your project context`));
-    console.log(chalk.dim(`  3. Run ${chalk.white('phantomind sync')} to generate adapter configs`));
-    console.log(chalk.dim(`  4. Run ${chalk.white('phantomind serve')} to start the MCP server`));
+    console.log(chalk2.dim('  Adapters: ') + selectedAdapters.map(a => chalk2.white(a)).join(', '));
+    console.log(chalk2.dim('  Provider: ') + chalk2.white(selectedProvider));
+    console.log('');
+    console.log(chalk2.dim('Next steps:'));
+    console.log(chalk2.dim(`  1. Copy ${chalk2.white('.env.phantomind.example')} → ${chalk2.white('.env.phantomind')} and add your API keys`));
+    console.log(chalk2.dim(`  2. Customize ${chalk2.white('.phantomind/SKILLS.md')} with your project context`));
+    console.log(chalk2.dim(`  3. Run ${chalk2.white('phantomind sync')} to generate adapter configs`));
+    console.log(chalk2.dim(`  4. Run ${chalk2.white('phantomind serve')} to start the MCP server`));
     console.log('');
   } catch (error) {
     spinner.fail('Initialization failed');
@@ -172,11 +230,45 @@ export async function initCommand(
   }
 }
 
+/**
+ * Auto-detect which AI tools the user likely uses based on existing config files.
+ */
+function detectAdapters(projectRoot: string): AdapterName[] {
+  const detected: AdapterName[] = [];
+  const checks: [string, AdapterName][] = [
+    ['.github/copilot-instructions.md', 'copilot'],
+    ['.cursorrules', 'cursor'],
+    ['.clinerules', 'cline'],
+    ['.continue', 'continue'],
+    ['.windsurfrules', 'windsurf'],
+    ['.zed/settings.json', 'zed'],
+    ['.aider.conf.yml', 'aider'],
+    ['.claude/CLAUDE.md', 'claude-code'],
+    ['AGENTS.md', 'codex'],
+  ];
+  for (const [path, adapter] of checks) {
+    if (existsSync(join(projectRoot, path))) {
+      detected.push(adapter);
+    }
+  }
+  return detected;
+}
+
 function detectProjectName(root: string): string {
   try {
-    const pkg = require(join(root, 'package.json'));
-    return pkg.name ?? root.split('/').pop() ?? 'project';
+    const pkgPath = join(root, 'package.json');
+    if (existsSync(pkgPath)) {
+      const pkg = JSON.parse(readFileSync(pkgPath));
+      return pkg.name ?? root.split('/').pop() ?? 'project';
+    }
+    return root.split('/').pop() ?? 'project';
   } catch {
     return root.split('/').pop() ?? 'project';
   }
+}
+
+// Sync import for simple file read in detectProjectName
+function readFileSync(filePath: string): string {
+  const { readFileSync: rfs } = require('node:fs');
+  return rfs(filePath, 'utf-8');
 }
