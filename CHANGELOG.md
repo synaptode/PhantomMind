@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.6] - 2026-04-01
+
+### Fixed
+- Fixed npm README not rendering on npmjs.com website — added missing LICENSE files to packages, re-published to force npm CDN cache refresh
+
 ## [0.1.5] - 2026-03-31
 
 ### Added
