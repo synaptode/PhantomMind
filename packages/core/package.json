@@ -1,6 +1,6 @@
 {
   "name": "@phantomind/core",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "PhantomMindAI — Universal AI Context Layer for Development",
   "type": "module",
   "main": "./dist/index.js",
@@ -38,6 +38,7 @@
     "phantomind": "tsx src/cli/main.ts",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint": "eslint src/"
   },
   "author": {
@@ -61,23 +62,24 @@
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
     "cosmiconfig": "^9.0.0",
+    "eventemitter3": "^5.0.1",
+    "fast-glob": "^3.3.3",
     "glob": "^11.0.1",
     "inquirer": "^12.6.0",
     "js-yaml": "^4.1.0",
+    "natural": "^8.0.1",
+    "node-cron": "^3.0.3",
     "openai": "^4.86.2",
     "ora": "^8.2.0",
     "zod": "^3.24.3",
-    "zod-to-json-schema": "^3.24.5",
-    "node-cron": "^3.0.3",
-    "fast-glob": "^3.3.3",
-    "natural": "^8.0.1",
-    "eventemitter3": "^5.0.1"
+    "zod-to-json-schema": "^3.24.5"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.7",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.13.10",
     "@types/node-cron": "^3.0.11",
+    "@vitest/coverage-v8": "^4.1.2",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",
     "vitest": "^3.1.1"
