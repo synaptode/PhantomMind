@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+prd/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# PhantomMindAI — do not commit
+.phantomind/memory/
+.phantomind/audit/
+.phantomind/cache/
+.phantomind/.env
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+npm-debug.log*

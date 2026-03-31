@@ -1,0 +1,534 @@
+# 🔮 PhantomMindAI
+
+**Universal AI Development Enhancement Layer**
+
+> *"You already pay for Copilot, Cursor, or Claude. PhantomMindAI makes what you already have 10x more effective."*
+
+[![npm version](https://img.shields.io/npm/v/@phantomind/core.svg)](https://www.npmjs.com/package/@phantomind/core)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js >=18](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue)](https://www.typescriptlang.org)
+[![MCP Compatible](https://img.shields.io/badge/MCP-compatible-purple)](https://modelcontextprotocol.io)
+
+---
+
+## What is PhantomMindAI?
+
+PhantomMindAI solves the **context amnesia problem**: AI assistants forget everything about your project every session, every context switch, and every time a new team member onboards.
+
+PhantomMindAI provides:
+
+- **Persistent context layer** — one source of truth (`SKILLS.md`, `RULES.md`, `schema.json`) synced to every AI assistant automatically
+- **Universal LLM abstraction** — one API for Anthropic, OpenAI, Gemini, Groq, Mistral, Ollama, DeepSeek, and OpenRouter, with automatic fallback and budget routing
+- **Agentic task execution** — multi-role agent orchestration with human-in-the-loop checkpoints
+- **AI output quality enforcement** — secret scanning, hallucination detection, dual-model verification, consistency checking
+- **MCP Server** — expose project intelligence as a Model Context Protocol server for Cursor, Continue, Claude Code, and more
+- **Full observability** — cost tracking, audit trails, and analytics dashboard
+
+---
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [CLI Reference](#cli-reference)
+- [Configuration](#configuration)
+- [Supported AI Assistants](#supported-ai-assistants)
+- [Supported LLM Providers](#supported-llm-providers)
+- [Programmatic API](#programmatic-api)
+- [MCP Server](#mcp-server)
+- [Agent System](#agent-system)
+- [Quality Layer](#quality-layer)
+- [Observability](#observability)
+- [Architecture](#architecture)
+
+---
+
+## Installation
+
+```bash
+# Install globally (recommended — enables `phantomind` CLI)
+npm install -g @phantomind/core
+
+# Or install as a project dependency
+npm install @phantomind/core
+
+# Verify installation
+phantomind --version
+```
+
+**Requirements:** Node.js ≥ 18
+
+---
+
+## Quick Start
+
+### 1. Initialize in your project
+
+```bash
+cd your-project
+phantomind init
+```
+
+This creates:
+
+```
+.phantomind/
+  SKILLS.md       ← Auto-learned project patterns
+  RULES.md        ← AI behavior rules
+  schema.json     ← Output contracts
+  config.yaml     ← PhantomMindAI configuration
+```
+
+### 2. Sync to your AI tools
+
+```bash
+phantomind sync
+```
+
+Generated adapter files (auto-updated, never edit directly):
+
+```
+.github/copilot-instructions.md   ← GitHub Copilot
+.cursorrules                      ← Cursor
+.clinerules                       ← Cline
+.continue/config.json             ← Continue
+.windsurfrules                    ← Windsurf
+.zed/settings.json                ← Zed
+.aider.conf.yml                   ← Aider
+.claude/CLAUDE.md                 ← Claude Code CLI
+AGENTS.md                         ← OpenAI Codex CLI
+```
+
+### 3. Use the programmatic API (optional)
+
+```typescript
+import { phantom } from '@phantomind/core';
+
+await phantom.init();
+
+// Complete with auto-routing across providers
+const response = await phantom.complete('Refactor this function to use async/await');
+
+// Run an agentic task
+const result = await phantom.agent('Add input validation to the user registration endpoint');
+
+// Semantic search across codebase
+const matches = await phantom.search('authentication middleware');
+```
+
+---
+
+## CLI Reference
+
+```
+phantomind [command] [options]
+```
+
+| Command | Description |
+|---------|-------------|
+| `phantomind init` | Initialize PhantomMindAI in the current project |
+| `phantomind sync` | Sync context to all configured AI assistant adapters |
+| `phantomind serve` | Start the MCP server (stdio or HTTP transport) |
+| `phantomind eval` | Test and benchmark LLM provider connections |
+| `phantomind validate [files...]` | Scan code for secrets, hallucinations, and consistency issues |
+| `phantomind audit` | View cost reports and audit trail |
+| `phantomind stats` | Display project context statistics |
+| `phantomind agent <task>` | Execute an agentic task from the CLI |
+| `phantomind schema [name]` | List or display schema definitions |
+
+### `phantomind init`
+
+```bash
+phantomind init [options]
+
+Options:
+  --provider <name>   Primary LLM provider (anthropic|openai|gemini|groq|mistral|ollama|deepseek|openrouter)
+  --adapters <list>   Comma-separated adapter list (e.g. copilot,cursor,cline)
+  --yes               Skip interactive prompts
+```
+
+### `phantomind sync`
+
+```bash
+phantomind sync [options]
+
+Options:
+  --adapters <list>   Only sync specific adapters
+  --dry-run           Preview changes without writing files
+  --verbose           Show per-file diff
+```
+
+### `phantomind validate`
+
+```bash
+phantomind validate [files...] [options]
+
+Options:
+  --no-secrets         Skip secret scanning
+  --no-hallucinations  Skip hallucination detection
+  --no-consistency     Skip consistency checking
+  --fix                Auto-fix detected secrets (redaction)
+```
+
+### `phantomind audit`
+
+```bash
+phantomind audit [options]
+
+Options:
+  --period <p>   today|week|month|all (default: today)
+  --type <t>     dashboard|costs|actions (default: dashboard)
+  --format <f>   terminal|markdown|json
+```
+
+### `phantomind agent`
+
+```bash
+phantomind agent <task> [options]
+
+Options:
+  --role <role>          architect|implementer|securityReviewer|testWriter|documenter
+  --orchestrate          Use multi-role orchestration
+  --roles <list>         Roles for orchestration (e.g. architect,implementer,testWriter)
+  --max-steps <n>        Maximum agent steps (default: 30)
+```
+
+---
+
+## Configuration
+
+PhantomMindAI is configured via `.phantomind/config.yaml`:
+
+```yaml
+# .phantomind/config.yaml
+
+providers:
+  primary:
+    name: anthropic
+    model: claude-opus-4-5
+    apiKey: ${ANTHROPIC_API_KEY}
+  fallback:
+    name: openai
+    model: gpt-4o
+    apiKey: ${OPENAI_API_KEY}
+  budget:
+    name: groq
+    model: llama-3.3-70b-versatile
+    apiKey: ${GROQ_API_KEY}
+
+adapters:
+  - copilot
+  - cursor
+  - cline
+  - continue
+  - claude-code
+  - codex
+
+mcp:
+  enabled: true
+  port: 3333
+
+budget:
+  maxCostPerDay: 5.00
+  warningAt: 0.80
+  fallbackOnBudget: budget
+
+agent:
+  maxSteps: 30
+  memory:
+    enabled: true
+    maxEntries: 200
+
+quality:
+  secretScanning: true
+  hallucinationDetection: true
+  dualVerification: false
+```
+
+### Environment Variables
+
+| Variable | Provider |
+|----------|----------|
+| `ANTHROPIC_API_KEY` | Anthropic (Claude) |
+| `OPENAI_API_KEY` | OpenAI (GPT) |
+| `GEMINI_API_KEY` | Google Gemini |
+| `GROQ_API_KEY` | Groq |
+| `MISTRAL_API_KEY` | Mistral |
+| `DEEPSEEK_API_KEY` | DeepSeek |
+| `OPENROUTER_API_KEY` | OpenRouter |
+
+PhantomMindAI automatically loads `.env` / `.env.local` from the project root.
+
+---
+
+## Supported AI Assistants
+
+| Adapter | File Generated | Status |
+|---------|---------------|--------|
+| GitHub Copilot | `.github/copilot-instructions.md` | ✅ |
+| Cursor | `.cursorrules` | ✅ |
+| Cline | `.clinerules` | ✅ |
+| Continue | `.continue/config.json` | ✅ |
+| Windsurf | `.windsurfrules` | ✅ |
+| Zed | `.zed/settings.json` | ✅ |
+| Aider | `.aider.conf.yml` | ✅ |
+| Claude Code | `.claude/CLAUDE.md` | ✅ |
+| OpenAI Codex | `AGENTS.md` | ✅ |
+
+---
+
+## Supported LLM Providers
+
+| Provider | Models | Notes |
+|----------|--------|-------|
+| **Anthropic** | claude-opus-4-5, claude-sonnet-4-5, claude-haiku-3-5 | Recommended primary |
+| **OpenAI** | gpt-4o, gpt-4o-mini, o3, o4-mini | Excellent fallback |
+| **Google Gemini** | gemini-2.0-flash, gemini-2.5-pro | Best for large context |
+| **Groq** | llama-3.3-70b, mixtral-8x7b | Best budget option |
+| **Mistral** | mistral-large-latest, codestral | Strong for code |
+| **Ollama** | any local model | No API key, fully local |
+| **DeepSeek** | deepseek-chat, deepseek-reasoner | Cost-efficient |
+| **OpenRouter** | 200+ models | Meta-provider |
+
+### Provider Routing
+
+```yaml
+providers:
+  primary:   # Highest quality — used by default
+    name: anthropic
+    model: claude-opus-4-5
+  fallback:  # Used if primary fails
+    name: openai
+    model: gpt-4o
+  budget:    # Used when daily cost threshold exceeded
+    name: groq
+    model: llama-3.3-70b-versatile
+  local:     # Used for offline/sensitive tasks
+    name: ollama
+    model: llama3.2
+```
+
+---
+
+## Programmatic API
+
+```typescript
+import { phantom } from '@phantomind/core';
+
+// Initialize (loads config, connects providers)
+await phantom.init();
+
+// Get project context (intelligent multi-layer context)
+const ctx = await phantom.ctx({ maxTokens: 4000 });
+
+// Complete with context injection and auto-routing
+const response = await phantom.complete('Explain the auth module', {
+  maxTokens: 1000,
+  temperature: 0.3,
+});
+
+// Complete with intelligent retry on failure
+const result = await phantom.completeWithRetry('Implement JWT refresh logic');
+
+// Run an agentic task (single role)
+const agentResult = await phantom.agent('Refactor the payment service', {
+  role: 'implementer',
+  maxSteps: 25,
+});
+
+// Multi-agent orchestration
+const orchestrated = await phantom.orchestrate(
+  'Build a rate limiting middleware',
+  ['architect', 'implementer', 'securityReviewer', 'testWriter'],
+);
+
+// Semantic search across codebase
+const matches = await phantom.search('database connection pooling', 5);
+// returns: Array<{ path, score, snippet }>
+
+// Sync adapters
+await phantom.sync(['copilot', 'cursor'], /* dryRun */ false);
+
+// Validate code
+const { secrets, hallucinations } = await phantom.validate(code, 'auth.ts');
+
+// Cost report
+const costs = phantom.costs('today'); // 'today' | 'week' | 'month' | 'all'
+
+// Analytics dashboard
+const dashboard = phantom.dashboard();
+console.log(dashboard.formatTerminal());
+
+// Learn project patterns
+const skills = await phantom.learn();
+
+// Save state
+await phantom.save();
+```
+
+---
+
+## MCP Server
+
+PhantomMindAI exposes a [Model Context Protocol](https://modelcontextprotocol.io) server providing 9 tools to any MCP-compatible AI assistant:
+
+```bash
+phantomind serve
+```
+
+### MCP Tools
+
+| Tool | Description |
+|------|-------------|
+| `get_project_context` | Full project context (skills, rules, schema) |
+| `search_codebase` | Semantic search across indexed files |
+| `validate_code` | Secret + hallucination scan |
+| `get_schema` | Retrieve a named JSON/Zod schema |
+| `list_schemas` | List all registered schemas |
+| `complete` | LLM completion via provider router |
+| `run_agent` | Execute an agentic task |
+| `get_cost_report` | Current cost breakdown |
+| `get_audit_log` | Recent audit entries |
+
+### MCP Configuration (Claude Desktop / Continue)
+
+```json
+{
+  "mcpServers": {
+    "phantomind": {
+      "command": "npx",
+      "args": ["phantomind", "serve"],
+      "cwd": "/path/to/your/project"
+    }
+  }
+}
+```
+
+---
+
+## Agent System
+
+### Roles
+
+| Role | Specialization |
+|------|---------------|
+| `architect` | System design, architecture decisions, dependency planning |
+| `implementer` | Feature implementation, code generation, refactoring |
+| `securityReviewer` | Vulnerability scanning, threat modeling, secure coding |
+| `testWriter` | Unit tests, integration tests, edge cases, mocks |
+| `documenter` | API docs, README, inline comments, changelogs |
+
+### Single-Agent Execution
+
+```bash
+phantomind agent "Add rate limiting to the API" --role implementer --max-steps 20
+```
+
+### Multi-Agent Orchestration
+
+```bash
+phantomind agent "Build OAuth2 integration" --orchestrate \
+  --roles architect,implementer,securityReviewer,testWriter
+```
+
+---
+
+## Quality Layer
+
+### Secret Scanning
+
+Detects and redacts API keys, tokens, passwords, and credentials:
+
+```bash
+phantomind validate src/ --secrets
+```
+
+Detects: AWS keys, GitHub tokens, Stripe keys, OpenAI keys, JWT secrets, PEM certificates, database connection strings, and 20+ other patterns.
+
+### Hallucination Detection
+
+Checks AI-generated code for:
+- `import` statements referencing non-existent packages
+- References to files that don't exist in the project
+- Usage of type names not defined in the codebase
+
+### Consistency Checking
+
+Identifies inconsistencies across the codebase:
+- Naming convention violations (camelCase vs snake_case drift)
+- Mixed async patterns
+- Architectural boundary violations
+
+### Dual-Model Verification
+
+For critical outputs, a second model independently verifies correctness before acceptance.
+
+---
+
+## Observability
+
+### Cost Tracking
+
+```bash
+phantomind audit --type costs --period week
+```
+
+Tracks cost per provider, per model, per day with budget alerts.
+
+### Audit Trail
+
+All agent actions are logged to `.phantomind/audit/audit.jsonl`:
+
+```bash
+phantomind audit --type actions
+```
+
+### Analytics Dashboard
+
+```bash
+phantomind audit --type dashboard
+```
+
+Displays: request count, total cost, success rate, response time, quality events, agent task completion.
+
+---
+
+## Architecture
+
+```
+packages/core/src/
+├── types.ts              ← All shared TypeScript interfaces
+├── index.ts              ← PhantomMind class + phantom singleton
+├── config/               ← Config loading (cosmiconfig, .env, deep-merge)
+├── providers/            ← LLM provider abstractions + router
+├── context/              ← Project context management + semantic search
+├── adapters/             ← AI assistant adapter sync (9 adapters)
+├── mcp/                  ← MCP Server (9 tools)
+├── agent/                ← Agentic execution engine + orchestrator
+├── quality/              ← Output quality enforcement
+├── schemas/              ← Schema registry (Zod + JSON Schema)
+├── templates/            ← SKILLS.md + RULES.md templates
+├── observability/        ← Audit, cost, dashboard
+└── cli/                  ← CLI commands (Commander.js)
+```
+
+---
+
+## Roadmap
+
+| Version | Features |
+|---------|---------|
+| **v0.1** | Context sync, adapter generation, CLI init/sync |
+| **v0.2** | Provider router, budget management, MCP server |
+| **v0.3** | Agent executor, orchestrator, task queue |
+| **v0.4** | Quality layer (secrets, hallucinations, consistency) |
+| **v0.5** | Observability (audit, costs, dashboard) |
+| **v1.0** | Schema registry, templates, stable API |
+| **v1.x** | VS Code extension, Git hooks, CI/CD integration |
+
+---
+
+## License
+
+MIT © [Synaptode](https://github.com/synaptode)

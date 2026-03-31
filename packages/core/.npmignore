@@ -1,0 +1,19 @@
+# Source files (only dist/ will be published)
+src/
+*.map
+
+# Config & dev files
+tsconfig.json
+tsconfig*.json
+vitest.config.*
+.eslintrc*
+.eslintignore
+
+# Tests
+**/*.test.ts
+**/*.spec.ts
+__tests__/
+
+# Misc
+*.log
+.DS_Store

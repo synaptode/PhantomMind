@@ -1,0 +1,85 @@
+{
+  "name": "@phantomind/core",
+  "version": "0.1.1",
+  "description": "PhantomMindAI — Universal AI Context Layer for Development",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "phantomind": "dist/cli/main.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/synaptode/PhantomMindAI.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/synaptode/PhantomMindAI#readme",
+  "bugs": {
+    "url": "https://github.com/synaptode/PhantomMindAI/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "dev": "tsc --watch",
+    "phantomind": "tsx src/cli/main.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src/"
+  },
+  "author": {
+    "name": "synaptode",
+    "url": "https://github.com/synaptode"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "copilot",
+    "cursor",
+    "mcp",
+    "context",
+    "agent",
+    "phantomind"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "cosmiconfig": "^9.0.0",
+    "glob": "^11.0.1",
+    "inquirer": "^12.6.0",
+    "js-yaml": "^4.1.0",
+    "openai": "^4.86.2",
+    "ora": "^8.2.0",
+    "zod": "^3.24.3",
+    "zod-to-json-schema": "^3.24.5",
+    "node-cron": "^3.0.3",
+    "fast-glob": "^3.3.3",
+    "natural": "^8.0.1",
+    "eventemitter3": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.13.10",
+    "@types/node-cron": "^3.0.11",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.1.1"
+  }
+}

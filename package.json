@@ -1,0 +1,15 @@
+{
+  "name": "phantomind-monorepo",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "npm -w @phantomind/core run build",
+    "dev": "npm -w @phantomind/core run dev",
+    "test": "npm -w @phantomind/core run test",
+    "lint": "npm -w @phantomind/core run lint",
+    "phantomind": "npm -w @phantomind/core run phantomind"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
