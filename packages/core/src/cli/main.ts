@@ -35,6 +35,7 @@ program
   .option('-a, --adapters <adapters...>', 'Target adapters (copilot, cursor, cline, etc.)')
   .option('-p, --provider <provider>', 'Primary LLM provider')
   .option('-m, --model <model>', 'Default model to use')
+  .option('-t, --template <template>', 'Project template (auto, default, node-library, node-cli, react-app, nextjs-app)')
   .option('-y, --yes', 'Skip interactive prompts')
   .action(async (options) => {
     const { initCommand } = await import('./init.js');
@@ -62,6 +63,56 @@ program
   .action(async (options) => {
     const { syncCommand } = await import('./sync.js');
     await syncCommand(process.cwd(), options);
+  });
+
+program
+  .command('diff')
+  .description('Show adapter output diffs without writing files')
+  .option('-a, --adapters <adapters...>', 'Target adapters to diff')
+  .option('-v, --verbose', 'Show full diff output')
+  .action(async (options) => {
+    const { diffCommand } = await import('./diff.js');
+    await diffCommand(process.cwd(), options);
+  });
+
+program
+  .command('context')
+  .description('Preview ranked context or search context sections')
+  .option('-f, --file <file>', 'Preview context ranked for a specific file')
+  .option('-s, --search <query>', 'Search context files for relevant sections')
+  .option('-m, --max-tokens <tokens>', 'Maximum token budget to display')
+  .option('--json', 'Output raw JSON')
+  .action(async (options) => {
+    const { contextCommand } = await import('./context.js');
+    await contextCommand(process.cwd(), options);
+  });
+
+program
+  .command('compare')
+  .description('Compare generated adapter payloads side by side')
+  .option('-a, --adapters <adapters...>', 'Target adapters to compare')
+  .option('-p, --preview', 'Show preview of generated output')
+  .action(async (options) => {
+    const { compareCommand } = await import('./compare.js');
+    await compareCommand(process.cwd(), options);
+  });
+
+program
+  .command('watch')
+  .description('Watch project files and refresh learned context automatically')
+  .option('-s, --sync', 'Also sync adapters after learning')
+  .action(async (options) => {
+    const { watchCommand } = await import('./watch.js');
+    await watchCommand(process.cwd(), options);
+  });
+
+program
+  .command('hooks')
+  .description('Install git hooks to keep context in sync')
+  .option('-f, --force', 'Overwrite existing hooks')
+  .action(async (options) => {
+    const { hooksCommand } = await import('./hooks.js');
+    await hooksCommand(process.cwd(), options);
   });
 
 // phantomind serve

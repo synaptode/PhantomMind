@@ -1,14 +1,17 @@
 /**
  * PhantomMindAI — CLI Init Command
- * Interactive project initialization with adapter & provider wizard.
+ * Interactive project initialization with adapter selection and optional provider setup.
  */
 
-import { writeFile, mkdir, readFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { writeFile, mkdir } from 'node:fs/promises';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import yaml from 'js-yaml';
 import type { PhantomConfig, AdapterName, ProviderName } from '../types.js';
 import { getDefaultConfig } from '../config/loader.js';
 import { ContextLearner } from '../context/learner.js';
+import { writeRulesContent } from '../context/rules-generator.js';
+import { PROJECT_TEMPLATES, detectProjectTemplate, type ProjectTemplateName } from '../context/project-template.js';
 
 const ADAPTER_CHOICES: { value: AdapterName; name: string; description: string }[] = [
   { value: 'copilot',     name: 'GitHub Copilot',  description: '.github/copilot-instructions.md' },
@@ -37,6 +40,7 @@ export interface InitOptions {
   adapters?: string[];
   provider?: string;
   model?: string;
+  template?: string;
   yes?: boolean;
 }
 
@@ -50,9 +54,11 @@ export async function initCommand(
   console.log(chalk.bold.cyan('\n🔮 PhantomMindAI — Project Initialization\n'));
 
   // Interactive wizard unless --yes or all flags provided
-  const skipWizard = options.yes || (options.adapters && options.provider);
+  const skipWizard = options.yes || !!options.adapters;
   let selectedAdapters: AdapterName[] = (options.adapters as AdapterName[]) ?? [];
   let selectedProvider: ProviderName = (options.provider as ProviderName) ?? 'anthropic';
+  let selectedTemplate: ProjectTemplateName = (options.template as ProjectTemplateName) ?? 'auto';
+  let providerConfigured = Boolean(options.provider);
 
   if (!skipWizard) {
     const inquirer = (await import('inquirer')).default;
@@ -75,16 +81,44 @@ export async function initCommand(
       selectedAdapters = adapters;
     }
 
-    // Step 2: Select primary LLM provider
-    if (!options.provider) {
-      const { provider } = await inquirer.prompt<{ provider: ProviderName }>([{
+    // Step 2: Select template strategy
+    if (!options.template) {
+      const { template } = await inquirer.prompt<{ template: ProjectTemplateName }>([{
         type: 'list',
-        name: 'provider',
-        message: 'Primary LLM provider:',
-        choices: PROVIDER_CHOICES,
-        default: 'anthropic',
+        name: 'template',
+        message: `Project template ${chalk.dim('(used for RULES.md defaults)')}:`,
+        choices: [
+          { value: 'auto', name: `Auto detect ${chalk.dim('(recommended)')}` },
+          ...Object.values(PROJECT_TEMPLATES).map(templateOption => ({
+            value: templateOption.name,
+            name: templateOption.displayName,
+          })),
+        ],
+        default: 'auto',
       }]);
-      selectedProvider = provider;
+      selectedTemplate = template;
+    }
+
+    // Step 3: Optionally configure LLM provider (only needed for agent/eval)
+    if (!options.provider) {
+      const { wantProvider } = await inquirer.prompt<{ wantProvider: boolean }>([{
+        type: 'confirm',
+        name: 'wantProvider',
+        message: `Configure LLM provider? ${chalk.dim('(only needed for agent/eval commands, not for sync)')}`,
+        default: false,
+      }]);
+
+      if (wantProvider) {
+        const { provider } = await inquirer.prompt<{ provider: ProviderName }>([{
+          type: 'list',
+          name: 'provider',
+          message: 'Primary LLM provider:',
+          choices: PROVIDER_CHOICES,
+          default: 'anthropic',
+        }]);
+        selectedProvider = provider;
+        providerConfigured = true;
+      }
     }
 
     console.log('');
@@ -130,12 +164,12 @@ export async function initCommand(
     };
 
     // Write config file
-    const configPath = join(projectRoot, 'phantomind.config.json');
+    const configPath = join(phantomDir, 'config.yaml');
     if (!existsSync(configPath)) {
-      await writeFile(configPath, JSON.stringify(config, null, 2));
-      spinner.succeed('Created phantomind.config.json');
+      await writeFile(configPath, yaml.dump(config, { noRefs: true, lineWidth: 120 }), 'utf-8');
+      spinner.succeed('Created .phantomind/config.yaml');
     } else {
-      spinner.info('phantomind.config.json already exists, skipping');
+      spinner.info('.phantomind/config.yaml already exists, skipping');
     }
 
     // Auto-learn project context and write SKILLS.md
@@ -145,36 +179,22 @@ export async function initCommand(
     await learner.writeSkills(detectProjectName(projectRoot));
 
     // Create RULES.md
-    const rulesPath = join(phantomDir, 'RULES.md');
-    if (!existsSync(rulesPath)) {
-      const projectName = detectProjectName(projectRoot);
-      const rulesContent = [
-        `# ${projectName} — AI Rules`,
-        '',
-        '> Auto-generated by PhantomMindAI. Customize to set boundaries.',
-        '',
-        '## General Rules',
-        '1. Follow the existing code style',
-        '2. Never hardcode secrets or credentials',
-        '3. Always handle errors appropriately',
-        '4. Write self-documenting code',
-        '5. Keep functions focused and small',
-        '',
-        '## Forbidden Patterns',
-        '- Do not use `any` type in TypeScript',
-        '- Do not use `console.log` for production logging',
-        '- Do not commit commented-out code',
-        '',
-      ].join('\n');
-      await writeFile(rulesPath, rulesContent);
-    }
+    spinner.text = 'Generating project rules...';
+    const resolvedTemplate = selectedTemplate === 'auto'
+      ? detectProjectTemplate({
+          frameworks: learner.getTechStack().frameworks,
+          entryPoints: learner.getTechStack().entryPoints,
+          projectType: learner.getTechStack().projectType,
+        })
+      : selectedTemplate;
+    await writeRulesContent(projectRoot, { template: resolvedTemplate });
 
     // Create .env.example
-    const envExamplePath = join(projectRoot, '.env.phantomind.example');
-    if (!existsSync(envExamplePath)) {
+    const envExamplePath = join(phantomDir, '.env.example');
+    if (providerConfigured && !existsSync(envExamplePath)) {
       const envContent = [
         '# PhantomMindAI Environment Variables',
-        '# Copy to .env.phantomind and fill in your values',
+        '# Copy to .phantomind/.env and fill in your values',
         '',
         '# Provider API Keys (set the ones you need)',
         'ANTHROPIC_API_KEY=',
@@ -197,13 +217,14 @@ export async function initCommand(
     console.log(chalk2.green('✅ PhantomMindAI initialized successfully!'));
     console.log('');
     console.log(chalk2.dim('  Adapters: ') + selectedAdapters.map(a => chalk2.white(a)).join(', '));
-    console.log(chalk2.dim('  Provider: ') + chalk2.white(selectedProvider));
+    console.log(chalk2.dim('  Provider: ') + chalk2.white(providerConfigured ? selectedProvider : 'not configured'));
+    console.log(chalk2.dim('  Template: ') + chalk2.white(resolvedTemplate));
     console.log('');
     console.log(chalk2.dim('Next steps:'));
-    console.log(chalk2.dim(`  1. Copy ${chalk2.white('.env.phantomind.example')} → ${chalk2.white('.env.phantomind')} and add your API keys`));
-    console.log(chalk2.dim(`  2. Review & customize ${chalk2.white('.phantomind/SKILLS.md')} (auto-detected)`));
-    console.log(chalk2.dim(`  3. Run ${chalk2.white('phantomind sync')} to generate adapter configs`));
-    console.log(chalk2.dim(`  4. Run ${chalk2.white('phantomind learn --sync')} anytime to re-scan & sync`));
+    console.log(chalk2.dim(`  1. Review ${chalk2.white('.phantomind/SKILLS.md')} — auto-detected project context`));
+    console.log(chalk2.dim(`  2. Run ${chalk2.white('phantomind sync')} to generate adapter configs`));
+    console.log(chalk2.dim(`  3. Run ${chalk2.white('phantomind learn --sync')} anytime to re-scan & sync`));
+    console.log(chalk2.dim(`  4. ${chalk2.dim('(Optional)')} Configure provider + ${chalk2.white('.phantomind/.env')} only if you use ${chalk2.white('agent')} or ${chalk2.white('eval')}`));
     console.log('');
   } catch (error) {
     spinner.fail('Initialization failed');
@@ -239,17 +260,11 @@ function detectProjectName(root: string): string {
   try {
     const pkgPath = join(root, 'package.json');
     if (existsSync(pkgPath)) {
-      const pkg = JSON.parse(readFileSync(pkgPath));
+      const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8')) as { name?: string };
       return pkg.name ?? root.split('/').pop() ?? 'project';
     }
     return root.split('/').pop() ?? 'project';
   } catch {
     return root.split('/').pop() ?? 'project';
   }
-}
-
-// Sync import for simple file read in detectProjectName
-function readFileSync(filePath: string): string {
-  const { readFileSync: rfs } = require('node:fs');
-  return rfs(filePath, 'utf-8');
 }

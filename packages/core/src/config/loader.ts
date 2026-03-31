@@ -3,6 +3,7 @@
  */
 
 import { readFile, access } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import yaml from 'js-yaml';
 import { PhantomConfig, PhantomConfigSchema } from '../types.js';
@@ -117,10 +118,15 @@ function resolveEnvVars(value: unknown): unknown {
 export async function loadConfig(projectRoot?: string): Promise<PhantomConfig> {
   const root = projectRoot ?? await findProjectRoot();
   const configPath = join(root, '.phantomind', 'config.yaml');
+  const legacyJsonPath = join(root, 'phantomind.config.json');
 
   try {
-    const raw = await readFile(configPath, 'utf-8');
-    const parsed = yaml.load(raw) as Record<string, unknown>;
+    const raw = existsSync(configPath)
+      ? await readFile(configPath, 'utf-8')
+      : await readFile(legacyJsonPath, 'utf-8');
+    const parsed = existsSync(configPath)
+      ? yaml.load(raw) as Record<string, unknown>
+      : JSON.parse(raw) as Record<string, unknown>;
     const resolved = resolveEnvVars(parsed) as Record<string, unknown>;
 
     // Deep merge with defaults

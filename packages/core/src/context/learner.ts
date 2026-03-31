@@ -4,12 +4,12 @@
  * and writes actionable SKILLS.md content.
  */
 
-import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { join, extname, basename, dirname } from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
 import fastGlob from 'fast-glob';
 
-interface LearnedPattern {
+export interface LearnedPattern {
   type: 'naming' | 'structure' | 'import' | 'architecture' | 'convention';
   pattern: string;
   confidence: number;
@@ -19,7 +19,7 @@ interface LearnedPattern {
   occurrences: number;
 }
 
-interface TechStackInfo {
+export interface TechStackInfo {
   languages: string[];
   frameworks: string[];
   buildTools: string[];
@@ -41,7 +41,7 @@ interface LearningState {
   lastScanTimestamp: string;
 }
 
-const EMPTY_TECH_STACK: TechStackInfo = {
+export const EMPTY_TECH_STACK: TechStackInfo = {
   languages: [],
   frameworks: [],
   buildTools: [],
@@ -96,6 +96,7 @@ export class ContextLearner {
     const namingPatterns: Map<string, number> = new Map();
     const importPatterns: Map<string, number> = new Map();
     const structurePatterns: Map<string, string[]> = new Map();
+    const conventionPatterns: Map<string, string[]> = new Map();
 
     for (const file of files) {
       try {
@@ -105,6 +106,7 @@ export class ContextLearner {
         this.detectNamingPatterns(content, ext, namingPatterns);
         this.detectImportPatterns(content, ext, importPatterns);
         this.detectStructurePatterns(file, structurePatterns);
+        this.detectConventionPatterns(file, content, conventionPatterns);
       } catch {
         continue;
       }
@@ -146,6 +148,20 @@ export class ContextLearner {
       if (examples.length >= 2) {
         newPatterns.push({
           type: 'structure',
+          pattern,
+          confidence: Math.min(examples.length / 5, 1.0),
+          examples: examples.slice(0, 5),
+          firstSeen: now,
+          lastSeen: now,
+          occurrences: examples.length,
+        });
+      }
+    }
+
+    for (const [pattern, examples] of conventionPatterns) {
+      if (examples.length >= 2) {
+        newPatterns.push({
+          type: 'convention',
           pattern,
           confidence: Math.min(examples.length / 5, 1.0),
           examples: examples.slice(0, 5),
@@ -251,7 +267,25 @@ export class ContextLearner {
       lines.push('');
     }
 
+    const conventionP = this.state.patterns.filter(p => p.type === 'convention' && p.confidence > 0.3);
+    if (conventionP.length > 0) {
+      lines.push('## Project Conventions');
+      lines.push('');
+      for (const p of conventionP.sort((a, b) => b.occurrences - a.occurrences)) {
+        lines.push(`- ${p.pattern}`);
+      }
+      lines.push('');
+    }
+
     return lines.join('\n');
+  }
+
+  getTechStack(): TechStackInfo {
+    return structuredClone(this.state.techStack);
+  }
+
+  getPatterns(): LearnedPattern[] {
+    return structuredClone(this.state.patterns);
   }
 
   /**
@@ -288,7 +322,8 @@ export class ContextLearner {
         ts.languages.push('JavaScript');
 
         // Module type
-        if (pkg.type === 'module') ts.projectType = 'ESM (ES Modules)';
+        if (pkg.workspaces) ts.projectType = 'Monorepo';
+        else if (pkg.type === 'module') ts.projectType = 'ESM (ES Modules)';
         else ts.projectType = 'CommonJS';
 
         // Frameworks
@@ -354,6 +389,7 @@ export class ContextLearner {
             ts.entryPoints.push(`${name} → ${path}`);
           }
         }
+        if (pkg.workspaces) ts.entryPoints.push('workspaces → packages/*');
       } catch { /* skip */ }
     }
 
@@ -448,6 +484,27 @@ export class ContextLearner {
       if (content.includes("from 'node:")) this.incr(patterns, 'Use node: protocol for Node.js built-in imports');
       if (content.match(/import type/g)?.length) this.incr(patterns, 'Use type-only imports (import type {})');
       if (content.match(/import \* as/g)?.length) this.incr(patterns, 'Use namespace imports (import * as)');
+    }
+  }
+
+  private detectConventionPatterns(file: string, content: string, patterns: Map<string, string[]>): void {
+    if (/\b(createSlice|configureStore|useSelector|useDispatch)\b/.test(content)) {
+      this.addToList(patterns, 'Redux-style state management present', file);
+    }
+    if (/\b(create|use)Store\b|zustand/.test(content)) {
+      this.addToList(patterns, 'Store-based client state management present', file);
+    }
+    if (/\b(passport|next-auth|jsonwebtoken|jwt|session)\b/i.test(content)) {
+      this.addToList(patterns, 'Authentication/session patterns present', file);
+    }
+    if (/\b(?:router|app)\.(?:get|post|put|delete|patch)\b/.test(content)) {
+      this.addToList(patterns, 'Express-style route handlers present', file);
+    }
+    if (/export\s+(async\s+)?function\s+(GET|POST|PUT|PATCH|DELETE)\b/.test(content)) {
+      this.addToList(patterns, 'File-based HTTP handlers present', file);
+    }
+    if (/(^|\/)packages\//.test(file) || /(^|\/)apps\//.test(file)) {
+      this.addToList(patterns, 'Workspace package layout present', file);
     }
   }
 

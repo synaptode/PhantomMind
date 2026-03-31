@@ -1,4 +1,9 @@
 export { initCommand, type InitOptions } from './init.js';
+export { diffCommand, type DiffOptions } from './diff.js';
+export { contextCommand, type ContextCommandOptions } from './context.js';
+export { compareCommand, type CompareOptions } from './compare.js';
+export { watchCommand, type WatchOptions } from './watch.js';
+export { hooksCommand, type HooksOptions } from './hooks.js';
 export { syncCommand, type SyncOptions } from './sync.js';
 export { serveCommand, type ServeOptions } from './serve.js';
 export { evalCommand, type EvalOptions } from './eval.js';
