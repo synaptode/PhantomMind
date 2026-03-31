@@ -352,6 +352,33 @@ export interface CostReport {
   performanceMetrics?: PerformanceMetrics;
 }
 
+export type CostPeriod = 'today' | 'week' | 'month' | 'all';
+
+export interface DashboardMetrics {
+  overview: {
+    totalRequests: number;
+    totalCost: number;
+    avgCostPerRequest: number;
+    totalTokens: number;
+    activeProviders: string[];
+  };
+  performance: {
+    avgResponseTime: number;
+    successRate: number;
+    errorCount: number;
+  };
+  quality: {
+    secretsDetected: number;
+    hallucinationsDetected: number;
+    consistencyIssues: number;
+  };
+  agents: {
+    tasksCompleted: number;
+    tasksFailed: number;
+    avgStepsPerTask: number;
+  };
+}
+
 export interface ProviderCostBreakdown {
   provider: ProviderName;
   model: string;

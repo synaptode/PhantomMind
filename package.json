@@ -3,11 +3,15 @@
   "private": true,
   "workspaces": ["packages/*"],
   "scripts": {
-    "build": "npm -w @phantomind/core run build",
+    "build": "npm -w @phantomind/contracts run build && npm -w @phantomind/core run build",
+    "build:contracts": "npm -w @phantomind/contracts run build",
+    "build:core": "npm -w @phantomind/core run build",
     "dev": "npm -w @phantomind/core run dev",
     "test": "npm -w @phantomind/core run test",
     "lint": "npm -w @phantomind/core run lint",
-    "phantomind": "npm -w @phantomind/core run phantomind"
+    "phantomind": "npm -w @phantomind/core run phantomind",
+    "dashboard:dev": "npm -w @phantomind/dashboard run dev",
+    "dashboard:build": "npm -w @phantomind/dashboard run build"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -1,0 +1,56 @@
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 18px;
+  padding: 18px 18px 16px;
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 8px;
+  animation: cardRise 420ms ease forwards;
+  animation-delay: var(--delay, 0ms);
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.metric-card__header h3 {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--ink-subtle);
+}
+
+.metric-card__value {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  color: var(--ink-strong);
+}
+
+.metric-card__hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.metric-card[data-tone="good"] {
+  border-color: rgba(40, 145, 111, 0.4);
+  box-shadow: 0 10px 25px rgba(40, 145, 111, 0.12);
+}
+
+.metric-card[data-tone="warn"] {
+  border-color: rgba(230, 129, 63, 0.45);
+  box-shadow: 0 10px 25px rgba(230, 129, 63, 0.15);
+}
+
+.metric-card[data-tone="bad"] {
+  border-color: rgba(210, 70, 70, 0.45);
+  box-shadow: 0 10px 25px rgba(210, 70, 70, 0.12);
+}
+
+@keyframes cardRise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -44,11 +44,11 @@ export async function auditCommand(
       const dashboard = new AnalyticsDashboard(costTracker, auditTrail);
 
       if (options.format === 'json') {
-        console.log(JSON.stringify(dashboard.toJSON(), null, 2));
+        console.log(JSON.stringify(dashboard.toJSON(period), null, 2));
       } else if (options.format === 'markdown') {
-        console.log(dashboard.formatMarkdown());
+        console.log(dashboard.formatMarkdown(period));
       } else {
-        console.log(dashboard.formatTerminal());
+        console.log(dashboard.formatTerminal(period));
       }
     }
 

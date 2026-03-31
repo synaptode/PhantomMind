@@ -16,6 +16,7 @@
     "sourceMap": true
   },
   "references": [
+    { "path": "packages/contracts" },
     { "path": "packages/core" }
   ]
 }

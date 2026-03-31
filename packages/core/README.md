@@ -128,8 +128,15 @@ phantomind [command] [options]
 | Command | Description |
 |---------|-------------|
 | `phantomind init` | Initialize PhantomMindAI in the current project |
+| `phantomind learn` | Scan codebase and regenerate learned project context |
 | `phantomind sync` | Sync context to all configured AI assistant adapters |
+| `phantomind diff` | Preview adapter output diffs without writing files |
+| `phantomind context` | Preview ranked context or search context sections |
+| `phantomind compare` | Compare generated adapter payloads |
+| `phantomind watch` | Watch project files and refresh context automatically |
+| `phantomind hooks` | Install git hooks to keep context in sync |
 | `phantomind serve` | Start the MCP server (stdio or HTTP transport) |
+| `phantomind dashboard` | Start the observability dashboard server |
 | `phantomind eval` | Test and benchmark LLM provider connections |
 | `phantomind validate [files...]` | Scan code for secrets, hallucinations, and consistency issues |
 | `phantomind audit` | View cost reports and audit trail |
@@ -143,9 +150,20 @@ phantomind [command] [options]
 phantomind init [options]
 
 Options:
-  --provider <name>   Primary LLM provider (anthropic|openai|gemini|groq|mistral|ollama|deepseek|openrouter)
-  --adapters <list>   Comma-separated adapter list (e.g. copilot,cursor,cline)
+  --provider <name>   Optional LLM provider for agent/eval workflows
+  --adapters <list>   Space-separated adapter list (e.g. copilot cursor cline)
+  --template <name>   auto|default|node-library|node-cli|react-app|nextjs-app
   --yes               Skip interactive prompts
+```
+
+### `phantomind learn`
+
+```bash
+phantomind learn [options]
+
+Options:
+  --sync              Run adapter sync after learning
+  --verbose           Show detailed output
 ```
 
 ### `phantomind sync`
@@ -157,6 +175,71 @@ Options:
   --adapters <list>   Only sync specific adapters
   --dry-run           Preview changes without writing files
   --verbose           Show per-file diff
+```
+
+### `phantomind diff`
+
+```bash
+phantomind diff [options]
+
+Options:
+  --adapters <list>   Only diff specific adapters
+  --verbose           Show full diff output
+```
+
+### `phantomind context`
+
+```bash
+phantomind context [options]
+
+Options:
+  --file <path>       Rank context for a specific file
+  --search <query>    Search across context sections
+  --max-tokens <n>    Token budget for preview output
+  --json              Emit raw JSON
+```
+
+### `phantomind compare`
+
+```bash
+phantomind compare [options]
+
+Options:
+  --adapters <list>   Only compare specific adapters
+  --preview           Show generated content preview
+```
+
+### `phantomind watch`
+
+```bash
+phantomind watch [options]
+
+Options:
+  --sync              Run sync after each refresh
+```
+
+### `phantomind hooks`
+
+```bash
+phantomind hooks [options]
+
+Options:
+  --force             Overwrite existing git hooks
+```
+
+### `phantomind dashboard`
+
+```bash
+phantomind dashboard [options]
+
+Options:
+  --port <n>          Server port (default: 3101)
+  --host <host>       Server host (default: 127.0.0.1)
+  --ui <path>         Path to built dashboard assets
+  --cors              Enable CORS for local development
+  --token <token>     Require token for API access
+  --token-env <name>  Env var containing dashboard token
+  --token-query <q>   Optional query parameter name for token auth
 ```
 
 ### `phantomind validate`
@@ -258,7 +341,18 @@ quality:
 | `DEEPSEEK_API_KEY` | DeepSeek |
 | `OPENROUTER_API_KEY` | OpenRouter |
 
-PhantomMindAI automatically loads `.env` / `.env.local` from the project root.
+Provider-backed commands load `.phantomind/.env` when present. Core flows like `init`, `learn`, `sync`, `diff`, and `context` do not require API keys.
+
+### Dashboard UI
+
+If you build the optional Angular dashboard package, PhantomMindAI can serve both the API and the static UI:
+
+```bash
+npm run dashboard:build
+phantomind dashboard
+```
+
+Without a built UI, `phantomind dashboard` still starts an API-only observability server.
 
 ---
 

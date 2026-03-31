@@ -1,0 +1,142 @@
+<div class="page">
+  <header class="page-header">
+    <div class="title">
+      <p class="eyebrow">PhantomMindAI</p>
+      <h1>Observability Dashboard</h1>
+      <p class="subtitle">Telemetry for providers, quality gates, and agent throughput.</p>
+    </div>
+    <div class="status-panel" [ngClass]="store.state()">
+      <div class="status-pill">{{ statusLabel() }}</div>
+      <div class="status-hint">{{ statusHint() }}</div>
+      <div class="token-row">
+        <span class="token-status">{{ tokenStatus() }}</span>
+        <button type="button" class="token-toggle" (click)="toggleTokenInput()">
+          {{ showTokenInput() ? 'Hide' : 'Token' }}
+        </button>
+      </div>
+      <div class="token-input" *ngIf="showTokenInput()">
+        <input
+          type="password"
+          [value]="tokenDraft()"
+          (input)="onTokenInput(($event.target as HTMLInputElement).value)"
+          placeholder="Paste API token"
+        />
+        <button type="button" class="token-save" (click)="saveToken()">Save</button>
+        <button type="button" class="token-clear" *ngIf="auth.token()" (click)="clearToken()">Clear</button>
+      </div>
+      <div class="period-toggle">
+        <button
+          *ngFor="let option of periodOptions; trackBy: trackByLabel"
+          type="button"
+          [class.active]="store.period() === option.value"
+          (click)="onPeriodSelect(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      </div>
+      <button class="refresh" type="button" (click)="onRefresh()">Refresh</button>
+    </div>
+  </header>
+
+  <section class="grid grid--overview">
+    <pm-metric-card
+      *ngFor="let tile of store.overviewTiles(); let i = index; trackBy: trackByLabel"
+      [label]="tile.label"
+      [value]="tile.value"
+      [hint]="tile.hint"
+      [tone]="tile.tone || 'neutral'"
+      [delay]="i * 70"
+    ></pm-metric-card>
+  </section>
+
+  <section class="grid grid--split">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Performance</h2>
+        <p>Latency and reliability across providers.</p>
+      </div>
+      <div class="grid grid--panel">
+        <pm-metric-card
+          *ngFor="let tile of store.performanceTiles(); let i = index; trackBy: trackByLabel"
+          [label]="tile.label"
+          [value]="tile.value"
+          [hint]="tile.hint"
+          [tone]="tile.tone || 'neutral'"
+          [delay]="i * 70"
+        ></pm-metric-card>
+      </div>
+      <div class="chip-row" *ngIf="store.providerChips().length">
+        <span class="chip" *ngFor="let provider of store.providerChips(); trackBy: trackByString">
+          {{ provider }}
+        </span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Quality Signals</h2>
+        <p>Guardrail events and consistency checks.</p>
+      </div>
+      <div class="grid grid--panel">
+        <pm-metric-card
+          *ngFor="let tile of store.qualityTiles(); let i = index; trackBy: trackByLabel"
+          [label]="tile.label"
+          [value]="tile.value"
+          [hint]="tile.hint"
+          [tone]="tile.tone || 'neutral'"
+          [delay]="i * 70"
+        ></pm-metric-card>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid grid--split">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Agents</h2>
+        <p>Task throughput and error rates.</p>
+      </div>
+      <div class="grid grid--panel">
+        <pm-metric-card
+          *ngFor="let tile of store.agentTiles(); let i = index; trackBy: trackByLabel"
+          [label]="tile.label"
+          [value]="tile.value"
+          [hint]="tile.hint"
+          [tone]="tile.tone || 'neutral'"
+          [delay]="i * 70"
+        ></pm-metric-card>
+      </div>
+      <div class="budget" *ngIf="store.costs() as costs">
+        <div class="budget-title">Budget Remaining</div>
+        <div class="budget-value">
+          {{ costs.budgetRemaining !== undefined ? ('$' + costs.budgetRemaining.toFixed(2)) : 'Not Set' }}
+        </div>
+        <div class="budget-hint">Period: {{ costs.period }}</div>
+      </div>
+    </div>
+
+    <div class="panel audit">
+      <div class="panel-header">
+        <h2>Recent Actions</h2>
+        <p>Latest recorded system events.</p>
+      </div>
+      <div class="audit-list" *ngIf="store.auditItems().length; else emptyAudit">
+        <div
+          class="audit-row"
+          *ngFor="let item of store.auditItems(); trackBy: trackById"
+        >
+          <span class="audit-time">{{ item.time }}</span>
+          <span class="audit-action">{{ item.action }}</span>
+          <span class="audit-agent">{{ item.agent }}</span>
+        </div>
+      </div>
+      <ng-template #emptyAudit>
+        <div class="empty">No audit entries yet.</div>
+      </ng-template>
+    </div>
+  </section>
+
+  <div class="error" *ngIf="store.error()">
+    {{ store.error() }}
+  </div>
+</div>

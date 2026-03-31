@@ -165,6 +165,22 @@ program
     await auditCommand(process.cwd(), options);
   });
 
+// phantomind dashboard
+program
+  .command('dashboard')
+  .description('Start the observability dashboard server')
+  .option('-p, --port <port>', 'Server port', '3101')
+  .option('-H, --host <host>', 'Server host', '127.0.0.1')
+  .option('--ui <path>', 'Path to built dashboard assets')
+  .option('--cors', 'Enable CORS (useful for local dev)')
+  .option('--token <token>', 'Require token for API access')
+  .option('--token-env <name>', 'Env var containing API token', 'PHANTOMIND_DASHBOARD_TOKEN')
+  .option('--token-query <name>', 'Query param to read token from (optional)')
+  .action(async (options) => {
+    const { dashboardCommand } = await import('./dashboard.js');
+    await dashboardCommand(process.cwd(), options);
+  });
+
 // phantomind stats
 program
   .command('stats')

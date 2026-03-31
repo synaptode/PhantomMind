@@ -5,31 +5,7 @@
 
 import type { CostTracker } from './cost-tracker.js';
 import type { AuditTrail } from './audit.js';
-
-export interface DashboardMetrics {
-  overview: {
-    totalRequests: number;
-    totalCost: number;
-    avgCostPerRequest: number;
-    totalTokens: number;
-    activeProviders: string[];
-  };
-  performance: {
-    avgResponseTime: number;
-    successRate: number;
-    errorCount: number;
-  };
-  quality: {
-    secretsDetected: number;
-    hallucinationsDetected: number;
-    consistencyIssues: number;
-  };
-  agents: {
-    tasksCompleted: number;
-    tasksFailed: number;
-    avgStepsPerTask: number;
-  };
-}
+import type { CostPeriod, DashboardMetrics } from '../types.js';
 
 export class AnalyticsDashboard {
   private costTracker: CostTracker;
@@ -43,8 +19,8 @@ export class AnalyticsDashboard {
   /**
    * Get comprehensive metrics
    */
-  getMetrics(): DashboardMetrics {
-    const costReport = this.costTracker.getReport('today');
+  getMetrics(period: CostPeriod = 'today'): DashboardMetrics {
+    const costReport = this.costTracker.getReport(period);
     const recentAudit = this.auditTrail.getRecent(500);
 
     const providerRequests = recentAudit.filter(e => e.action === 'provider:request');
@@ -93,8 +69,8 @@ export class AnalyticsDashboard {
   /**
    * Format metrics as terminal-friendly text
    */
-  formatTerminal(): string {
-    const m = this.getMetrics();
+  formatTerminal(period: CostPeriod = 'today'): string {
+    const m = this.getMetrics(period);
     const width = 52;
     const hr = '─'.repeat(width);
 
@@ -130,8 +106,8 @@ export class AnalyticsDashboard {
   /**
    * Format as markdown
    */
-  formatMarkdown(): string {
-    const m = this.getMetrics();
+  formatMarkdown(period: CostPeriod = 'today'): string {
+    const m = this.getMetrics(period);
 
     return `# PhantomMindAI Analytics Dashboard
 
@@ -169,7 +145,7 @@ export class AnalyticsDashboard {
   /**
    * Export as JSON
    */
-  toJSON(): DashboardMetrics {
-    return this.getMetrics();
+  toJSON(period: CostPeriod = 'today'): DashboardMetrics {
+    return this.getMetrics(period);
   }
 }

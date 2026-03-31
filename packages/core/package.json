@@ -1,6 +1,6 @@
 {
   "name": "@phantomind/core",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "PhantomMindAI — Universal AI Context Layer for Development",
   "type": "module",
   "main": "./dist/index.js",
@@ -21,12 +21,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/synaptode/PhantomMindAI.git",
+    "url": "git+https://github.com/synaptode/PhantomMind.git",
     "directory": "packages/core"
   },
-  "homepage": "https://github.com/synaptode/PhantomMindAI#readme",
+  "homepage": "https://github.com/synaptode/PhantomMind#readme",
   "bugs": {
-    "url": "https://github.com/synaptode/PhantomMindAI/issues"
+    "url": "https://github.com/synaptode/PhantomMind/issues"
   },
   "publishConfig": {
     "access": "public"

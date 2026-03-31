@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --font-display: 'Space Grotesk', 'Trebuchet MS', sans-serif;
+  --font-body: 'IBM Plex Sans', 'Helvetica Neue', sans-serif;
+  --bg-1: #f7f2ec;
+  --bg-2: #e6f0f4;
+  --surface: #ffffff;
+  --surface-border: rgba(27, 40, 50, 0.08);
+  --ink-strong: #1b2832;
+  --ink-muted: #5b6a76;
+  --ink-subtle: #7b8894;
+  --accent-strong: #1f6f8b;
+  --accent-soft: rgba(31, 111, 139, 0.16);
+  --shadow-soft: 0 18px 40px rgba(27, 40, 50, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink-strong);
+  background: radial-gradient(circle at 20% 20%, rgba(240, 138, 93, 0.18), transparent 40%),
+    radial-gradient(circle at 80% 10%, rgba(31, 111, 139, 0.16), transparent 35%),
+    linear-gradient(120deg, var(--bg-1), var(--bg-2));
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(31, 111, 139, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: -1;
+}
+
+button {
+  font-family: var(--font-body);
+}

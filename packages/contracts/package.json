@@ -1,0 +1,43 @@
+{
+  "name": "@phantomind/contracts",
+  "version": "0.1.0",
+  "description": "PhantomMindAI shared domain contracts — types for the observability dashboard API",
+  "keywords": ["phantomind", "ai", "contracts", "types", "observability", "dashboard"],
+  "author": "Synaptode",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/synaptode/PhantomMind.git",
+    "directory": "packages/contracts"
+  },
+  "homepage": "https://github.com/synaptode/PhantomMind#readme",
+  "bugs": {
+    "url": "https://github.com/synaptode/PhantomMind/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

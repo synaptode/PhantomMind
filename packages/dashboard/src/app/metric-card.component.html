@@ -1,0 +1,7 @@
+<article class="metric-card" [attr.data-tone]="tone()" [style.--delay]="delay() + 'ms'">
+  <header class="metric-card__header">
+    <h3>{{ label() }}</h3>
+  </header>
+  <div class="metric-card__value">{{ value() }}</div>
+  <p class="metric-card__hint" *ngIf="hint()">{{ hint() }}</p>
+</article>

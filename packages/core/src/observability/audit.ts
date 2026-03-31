@@ -149,7 +149,10 @@ export class AuditTrail {
    * Load entries from disk
    */
   async loadFromDisk(limit = 500): Promise<AuditEntry[]> {
-    if (!existsSync(this.logFile)) return [];
+    if (!existsSync(this.logFile)) {
+      this.entries = [];
+      return [];
+    }
 
     const content = await readFile(this.logFile, 'utf-8');
     const lines = content.trim().split('\n').filter(Boolean);
