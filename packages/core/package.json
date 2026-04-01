@@ -1,6 +1,6 @@
 {
   "name": "@phantomind/core",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "PhantomMindAI — Universal AI Context Layer for Development",
   "type": "module",
   "main": "./dist/index.js",

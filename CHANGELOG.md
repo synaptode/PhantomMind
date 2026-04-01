@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.7] - 2026-04-01
+
+### Added
+- 7 new test files covering previously untested modules:
+  - `providers/router.test.ts` (19 tests) — fallback chain, budget management, events
+  - `providers/base.test.ts` (12 tests) — config redaction, message building, cost estimation
+  - `quality/secret-scanner.test.ts` (20 tests) — 11 secret pattern types, redaction, custom patterns
+  - `quality/hallucination-guard.test.ts` (13 tests) — import/file validation, language-aware detection
+  - `schemas/registry.test.ts` (34 tests) — CRUD, validation, search, Zod conversion, persistence
+  - `agent/retry.test.ts` (16 tests) — 5 retry strategies, selection logic, max retries
+  - `adapters/adapters.test.ts` (12 tests) — all 4 adapter formats and content generation
+
+### Fixed
+- **Hallucination guard language detection bug** — `import numpy` in Python files was incorrectly flagged as an unknown Swift module. Added file-extension-based language detection (`getLanguage()`) so Python imports are checked first for `.py` files and Swift imports are scoped to `.swift` files.
+
+### Stats
+- **Test files:** 19 | **Tests:** 154 (up from 12 files / 28 tests — 450% increase)
+
 ## [0.1.6] - 2026-04-01
 
 ### Fixed

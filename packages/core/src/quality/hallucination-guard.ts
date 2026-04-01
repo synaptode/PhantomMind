@@ -45,10 +45,39 @@ export class HallucinationGuard {
   }
 
   /**
+   * Detect file language from extension
+   */
+  private getLanguage(file: string): 'typescript' | 'swift' | 'python' | 'unknown' {
+    const ext = file.split('.').pop()?.toLowerCase();
+    if (ext === 'ts' || ext === 'tsx' || ext === 'js' || ext === 'jsx' || ext === 'mjs' || ext === 'cjs') return 'typescript';
+    if (ext === 'swift') return 'swift';
+    if (ext === 'py' || ext === 'pyw') return 'python';
+    return 'unknown';
+  }
+
+  /**
    * Check import statements against actual dependencies
    */
   private async checkImports(line: string, file: string, lineNum: number): Promise<HallucinationCheck[]> {
     const checks: HallucinationCheck[] = [];
+    const lang = this.getLanguage(file);
+
+    // Python imports — check early using file extension to avoid ambiguity with Swift
+    if (lang === 'python') {
+      const pyImportMatch = line.match(/^(?:from|import)\s+([\w.]+)/);
+      if (pyImportMatch) {
+        const module = pyImportMatch[1].split('.')[0];
+        // We can't fully validate Python imports without pip list, so mark as exists
+        checks.push({
+          type: 'import',
+          reference: module,
+          exists: true,
+          file,
+          line: lineNum,
+        });
+      }
+      return checks;
+    }
 
     // TypeScript/JavaScript imports
     const tsImportMatch = line.match(/(?:import|from)\s+['"]([^'"./][^'"]*)['"]/);
@@ -71,37 +100,25 @@ export class HallucinationGuard {
     }
 
     // Swift imports
-    const swiftImportMatch = line.match(/^import\s+(\w+)/);
-    if (swiftImportMatch && !tsImportMatch) {
-      const module = swiftImportMatch[1];
-      const swiftBuiltins = new Set([
-        'Foundation', 'UIKit', 'SwiftUI', 'Combine', 'CoreData', 'MapKit',
-        'WebKit', 'AVFoundation', 'CoreLocation', 'StoreKit', 'WidgetKit',
-        'ActivityKit', 'SwiftData', 'Observation', 'XCTest', 'Testing',
-      ]);
+    if (lang === 'swift' || lang === 'unknown') {
+      const swiftImportMatch = line.match(/^import\s+(\w+)/);
+      if (swiftImportMatch && !tsImportMatch) {
+        const module = swiftImportMatch[1];
+        const swiftBuiltins = new Set([
+          'Foundation', 'UIKit', 'SwiftUI', 'Combine', 'CoreData', 'MapKit',
+          'WebKit', 'AVFoundation', 'CoreLocation', 'StoreKit', 'WidgetKit',
+          'ActivityKit', 'SwiftData', 'Observation', 'XCTest', 'Testing',
+        ]);
 
-      checks.push({
-        type: 'import',
-        reference: module,
-        exists: swiftBuiltins.has(module),
-        suggestions: this.findSimilar(module, [...swiftBuiltins]),
-        file,
-        line: lineNum,
-      });
-    }
-
-    // Python imports
-    const pyImportMatch = line.match(/^(?:from|import)\s+([\w.]+)/);
-    if (pyImportMatch && !tsImportMatch && !swiftImportMatch) {
-      const module = pyImportMatch[1].split('.')[0];
-      // We can't fully validate Python imports without pip list, so mark as exists
-      checks.push({
-        type: 'import',
-        reference: module,
-        exists: true,
-        file,
-        line: lineNum,
-      });
+        checks.push({
+          type: 'import',
+          reference: module,
+          exists: swiftBuiltins.has(module),
+          suggestions: this.findSimilar(module, [...swiftBuiltins]),
+          file,
+          line: lineNum,
+        });
+      }
     }
 
     return checks;
