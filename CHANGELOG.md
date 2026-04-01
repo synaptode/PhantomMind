@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.8] - 2026-04-01
+
+### Fixed
+- **npm README rendering** — Added `prepack`/`postpack` scripts to inject README content into package.json metadata before publish. Works around npm 11 workspace bug where README is not embedded in version-specific registry metadata, causing npmjs.com to show "This package does not have a README."
+
 ## [0.1.7] - 2026-04-01
 
 ### Added
