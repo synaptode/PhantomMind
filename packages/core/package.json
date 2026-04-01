@@ -1,6 +1,6 @@
 {
   "name": "@phantomind/core",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "PhantomindAI — AI Context Layer with Real-Time Automation, Multi-LLM Support & Agent Orchestration",
   "type": "module",
   "main": "./dist/index.js",
