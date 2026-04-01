@@ -261,4 +261,23 @@ program
     await upgradeCommand();
   });
 
+// phantomind troubleshoot
+program
+  .command('troubleshoot')
+  .description('Run comprehensive diagnostics and fix suggestions')
+  .option('--json', 'Output results as JSON')
+  .action(async (options) => {
+    const { troubleshootCommand } = await import('./troubleshoot.js');
+    await troubleshootCommand(process.cwd(), options);
+  });
+
+// phantomind tune
+program
+  .command('tune')
+  .description('Auto-tune configuration based on project analysis')
+  .action(async () => {
+    const { tuneCommand } = await import('./tune.js');
+    await tuneCommand(process.cwd());
+  });
+
 program.parse();
