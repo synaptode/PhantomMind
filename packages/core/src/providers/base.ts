@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Abstract Provider Base
+ * PhantomindAI — Abstract Provider Base
  */
 
 import type {

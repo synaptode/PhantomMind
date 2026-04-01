@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — CLI Sync Command
+ * PhantomindAI — CLI Sync Command
  * Generates and syncs adapter configurations for all AI tools.
  */
 
@@ -21,7 +21,7 @@ export async function syncCommand(
   const chalk = (await import('chalk')).default;
   const ora = (await import('ora')).default;
 
-  console.log(chalk.bold.cyan('\n🔄 PhantomMindAI — Sync Adapters\n'));
+  console.log(chalk.bold.cyan('\n🔄 PhantomindAI — Sync Adapters\n'));
 
   const spinner = ora('Loading configuration...').start();
 

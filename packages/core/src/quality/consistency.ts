@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Cross-File Consistency Enforcer
+ * PhantomindAI — Cross-File Consistency Enforcer
  * Detect naming, pattern, and architecture inconsistencies.
  */
 

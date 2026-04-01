@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — CLI Learn Command
+ * PhantomindAI — CLI Learn Command
  * Scans codebase, detects tech stack & patterns, writes SKILLS.md,
  * and optionally runs sync to update adapter files.
  */
@@ -18,7 +18,7 @@ export async function learnCommand(
   const chalk = (await import('chalk')).default;
   const ora = (await import('ora')).default;
 
-  console.log(chalk.bold.cyan('\n🧠 PhantomMindAI — Learn Project Context\n'));
+  console.log(chalk.bold.cyan('\n🧠 PhantomindAI — Learn Project Context\n'));
 
   const spinner = ora('Scanning codebase...').start();
 

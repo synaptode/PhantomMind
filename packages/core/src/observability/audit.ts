@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Audit Trail
+ * PhantomindAI — Audit Trail
  * Immutable audit logging for all agent actions and decisions.
  */
 

@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Mistral Provider
+ * PhantomindAI — Mistral Provider
  */
 
 import { BaseProvider } from './base.js';

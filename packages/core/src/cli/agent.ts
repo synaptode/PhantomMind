@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — CLI Agent Command
+ * PhantomindAI — CLI Agent Command
  * Run agentic tasks from the command line.
  */
 
@@ -25,7 +25,7 @@ export async function agentCommand(
   const chalk = (await import('chalk')).default;
   const ora = (await import('ora')).default;
 
-  console.log(chalk.bold.cyan('\n🤖 PhantomMindAI — Agent Execution\n'));
+  console.log(chalk.bold.cyan('\n🤖 PhantomindAI — Agent Execution\n'));
 
   const spinner = ora('Initializing agent...').start();
 

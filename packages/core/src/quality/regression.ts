@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Regression Detector
+ * PhantomindAI — Regression Detector
  * Snapshot project state before agent run, compare after, detect breakage.
  */
 

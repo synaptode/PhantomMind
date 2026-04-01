@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Adapter Registry & Factory
+ * PhantomindAI — Adapter Registry & Factory
  */
 
 import { BaseAdapter } from './base.js';

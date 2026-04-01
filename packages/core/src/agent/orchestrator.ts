@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Multi-Agent Orchestrator
+ * PhantomindAI — Multi-Agent Orchestrator
  * Parallel specialized agent execution with role-based coordination.
  */
 

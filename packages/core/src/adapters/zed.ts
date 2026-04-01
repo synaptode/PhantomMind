@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Zed AI Adapter
+ * PhantomindAI — Zed AI Adapter
  */
 
 import { BaseAdapter } from './base.js';

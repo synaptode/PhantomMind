@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Schema Registry
+ * PhantomindAI — Schema Registry
  * Manages JSON Schema definitions for structured AI output validation.
  * Supports prebuilt schemas and custom user schemas.
  */

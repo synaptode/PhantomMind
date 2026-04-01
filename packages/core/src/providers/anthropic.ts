@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Anthropic Provider (Claude)
+ * PhantomindAI — Anthropic Provider (Claude)
  */
 
 import { BaseProvider } from './base.js';

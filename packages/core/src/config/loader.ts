@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Configuration Loader
+ * PhantomindAI — Configuration Loader
  */
 
 import { readFile, access } from 'node:fs/promises';
@@ -25,7 +25,7 @@ const DEFAULT_CONFIG: PhantomConfig = {
     prds: '.phantomind/prds/',
     decisions: '.phantomind/decisions/',
   },
-  adapters: ['copilot', 'cursor', 'cline', 'continue', 'windsurf'],
+  adapters: ['copilot'],
   mcp: {
     enabled: true,
     port: 3741,
@@ -113,7 +113,7 @@ function resolveEnvVars(value: unknown): unknown {
 }
 
 /**
- * Load PhantomMindAI configuration from .phantomind/config.yaml
+ * Load PhantomindAI configuration from .phantomind/config.yaml
  */
 export async function loadConfig(projectRoot?: string): Promise<PhantomConfig> {
   const root = projectRoot ?? await findProjectRoot();
@@ -136,7 +136,7 @@ export async function loadConfig(projectRoot?: string): Promise<PhantomConfig> {
     const result = PhantomConfigSchema.safeParse(merged);
     if (!result.success) {
       const errors = result.error.issues.map(i => `  - ${i.path.join('.')}: ${i.message}`).join('\n');
-      throw new Error(`Invalid PhantomMindAI config:\n${errors}`);
+      throw new Error(`Invalid PhantomindAI config:\n${errors}`);
     }
 
     return result.data;

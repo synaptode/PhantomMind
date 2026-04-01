@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — CLI Stats Command
+ * PhantomindAI — CLI Stats Command
  * Display project statistics and context info.
  */
 
@@ -20,7 +20,7 @@ export async function statsCommand(
   const chalk = (await import('chalk')).default;
   const ora = (await import('ora')).default;
 
-  console.log(chalk.bold.cyan('\n📈 PhantomMindAI — Project Stats\n'));
+  console.log(chalk.bold.cyan('\n📈 PhantomindAI — Project Stats\n'));
 
   const spinner = ora('Analyzing project...').start();
 

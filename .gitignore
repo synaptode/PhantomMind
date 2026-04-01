@@ -6,11 +6,21 @@ prd/
 dist/
 *.tsbuildinfo
 
-# PhantomMindAI — do not commit
+# PhantomindAI — do not commit
 .phantomind/memory/
 .phantomind/audit/
 .phantomind/cache/
 .phantomind/.env
+
+# PhantomindAI generated adapter files (only keep copilot for this repo)
+.cursorrules
+.clinerules
+.windsurfrules
+.continue/config.json
+.zed/
+.aider.conf.yml
+.claude/
+AGENTS.md
 
 # Environment
 .env

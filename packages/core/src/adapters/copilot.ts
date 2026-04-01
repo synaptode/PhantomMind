@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — GitHub Copilot Adapter
+ * PhantomindAI — GitHub Copilot Adapter
  */
 
 import { BaseAdapter } from './base.js';

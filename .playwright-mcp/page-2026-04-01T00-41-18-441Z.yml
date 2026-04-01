@@ -1,0 +1,970 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - text: "skip to:"
+          - link "skip to content" [ref=e8] [cursor=pointer]:
+            - /url: "#main"
+            - text: content
+          - link "skip to package search" [ref=e9] [cursor=pointer]:
+            - /url: "#search"
+            - text: package search
+          - link "skip to sign in" [ref=e10] [cursor=pointer]:
+            - /url: "#signin"
+            - text: sign in
+        - generic [ref=e11]:
+          - generic [ref=e12]: ❤
+          - navigation "Product Navigation" [ref=e13]:
+            - list [ref=e14]:
+              - listitem [ref=e15]:
+                - link "Pro" [ref=e16] [cursor=pointer]:
+                  - /url: /products/pro
+              - listitem [ref=e17]:
+                - link "Teams" [ref=e18] [cursor=pointer]:
+                  - /url: /products/teams
+              - listitem [ref=e19]:
+                - link "Pricing" [ref=e20] [cursor=pointer]:
+                  - /url: /products
+              - listitem [ref=e21]:
+                - link "Documentation" [ref=e22] [cursor=pointer]:
+                  - /url: https://docs.npmjs.com
+      - generic [ref=e24]:
+        - generic [ref=e25]: npm
+        - link "Npm" [ref=e27] [cursor=pointer]:
+          - /url: /
+          - img [ref=e28]
+        - generic [ref=e31]:
+          - generic [ref=e33]:
+            - img [ref=e35]
+            - combobox "Search packages" [ref=e41]
+          - button "Search" [ref=e43]
+        - generic [ref=e45]:
+          - link "Sign Up" [ref=e46] [cursor=pointer]:
+            - /url: /signup
+          - link "Sign In" [ref=e47] [cursor=pointer]:
+            - /url: /login
+    - main [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - heading "@phantomind/core TypeScript icon, indicating that this package has built-in type declarations" [level=1] [ref=e51]:
+            - generic [ref=e52]: "@phantomind/core"
+            - img "TypeScript icon, indicating that this package has built-in type declarations" [ref=e54]
+          - generic [ref=e55]: 0.1.5 •
+          - generic [ref=e56]: Public
+          - generic [ref=e57]:
+            - text: • Published
+            - time [ref=e58]: 6 hours ago
+        - tablist [ref=e59]:
+          - tab "Readme" [selected] [ref=e60] [cursor=pointer]:
+            - generic [ref=e61]:
+              - img [ref=e62]
+              - text: Readme
+          - tab "Code Beta" [ref=e64] [cursor=pointer]:
+            - generic [ref=e65]:
+              - img [ref=e66]
+              - text: Code
+              - generic [ref=e69]: Beta
+          - tab "16 Dependencies" [ref=e70] [cursor=pointer]:
+            - generic [ref=e71]:
+              - img [ref=e72]
+              - text: 16 Dependencies
+          - tab "0 Dependents" [ref=e74] [cursor=pointer]:
+            - generic [ref=e75]:
+              - img [ref=e76]
+              - text: 0 Dependents
+          - tab "5 Versions" [ref=e78] [cursor=pointer]:
+            - generic [ref=e79]:
+              - img [ref=e80]
+              - text: 5 Versions
+        - generic [ref=e83]:
+          - tabpanel "Readme" [ref=e84]:
+            - article [ref=e86]:
+              - generic [ref=e87]:
+                - generic [ref=e88]:
+                  - heading "🔮 PhantomindAI" [level=1] [ref=e89]
+                  - 'link "Permalink: 🔮 PhantomindAI" [ref=e90] [cursor=pointer]':
+                    - /url: "#-phantommindai"
+                - paragraph [ref=e91]:
+                  - strong [ref=e92]: Universal AI Development Enhancement Layer
+                - blockquote [ref=e93]:
+                  - paragraph [ref=e94]:
+                    - emphasis [ref=e95]: "\"You already pay for Copilot, Cursor, or Claude. PhantomindAI makes what you already have 10x more effective.\""
+                - paragraph [ref=e96]:
+                  - link "npm version" [ref=e97] [cursor=pointer]:
+                    - /url: https://www.npmjs.com/package/@phantomind/core
+                    - img "npm version" [ref=e98]
+                  - 'link "License: MIT" [ref=e99] [cursor=pointer]':
+                    - /url: https://opensource.org/licenses/MIT
+                    - 'img "License: MIT" [ref=e100]'
+                  - link "Node.js >=18" [ref=e101] [cursor=pointer]:
+                    - /url: https://nodejs.org
+                    - img "Node.js >=18" [ref=e102]
+                  - link "TypeScript" [ref=e103] [cursor=pointer]:
+                    - /url: https://www.typescriptlang.org
+                    - img "TypeScript" [ref=e104]
+                  - link "MCP Compatible" [ref=e105] [cursor=pointer]:
+                    - /url: https://modelcontextprotocol.io
+                    - img "MCP Compatible" [ref=e106]
+                - separator [ref=e107]
+                - generic [ref=e108]:
+                  - heading "What is PhantomindAI?" [level=2] [ref=e109]
+                  - 'link "Permalink: What is PhantomindAI?" [ref=e110] [cursor=pointer]':
+                    - /url: "#what-is-phantommindai"
+                - paragraph [ref=e111]:
+                  - text: PhantomindAI solves the
+                  - strong [ref=e112]: context amnesia problem
+                  - text: ": AI assistants forget everything about your project every session, every context switch, and every time a new team member onboards."
+                - paragraph [ref=e113]: "PhantomindAI provides:"
+                - list [ref=e114]:
+                  - listitem [ref=e115]:
+                    - strong [ref=e116]: Persistent context layer
+                    - text: — one source of truth (
+                    - code [ref=e117]: SKILLS.md
+                    - text: ","
+                    - code [ref=e118]: RULES.md
+                    - text: ","
+                    - code [ref=e119]: schema.json
+                    - text: ) synced to every AI assistant automatically
+                  - listitem [ref=e120]:
+                    - strong [ref=e121]: Universal LLM abstraction
+                    - text: — one API for Anthropic, OpenAI, Gemini, Groq, Mistral, Ollama, DeepSeek, and OpenRouter, with automatic fallback and budget routing
+                  - listitem [ref=e122]:
+                    - strong [ref=e123]: Agentic task execution
+                    - text: — multi-role agent orchestration with human-in-the-loop checkpoints
+                  - listitem [ref=e124]:
+                    - strong [ref=e125]: AI output quality enforcement
+                    - text: — secret scanning, hallucination detection, dual-model verification, consistency checking
+                  - listitem [ref=e126]:
+                    - strong [ref=e127]: MCP Server
+                    - text: — expose project intelligence as a Model Context Protocol server for Cursor, Continue, Claude Code, and more
+                  - listitem [ref=e128]:
+                    - strong [ref=e129]: Full observability
+                    - text: — cost tracking, audit trails, and analytics dashboard
+                - separator [ref=e130]
+                - generic [ref=e131]:
+                  - heading "Table of Contents" [level=2] [ref=e132]
+                  - 'link "Permalink: Table of Contents" [ref=e133] [cursor=pointer]':
+                    - /url: "#table-of-contents"
+                - list [ref=e134]:
+                  - listitem [ref=e135]:
+                    - link "Installation" [ref=e136] [cursor=pointer]:
+                      - /url: "#installation"
+                  - listitem [ref=e137]:
+                    - link "Quick Start" [ref=e138] [cursor=pointer]:
+                      - /url: "#quick-start"
+                  - listitem [ref=e139]:
+                    - link "CLI Reference" [ref=e140] [cursor=pointer]:
+                      - /url: "#cli-reference"
+                  - listitem [ref=e141]:
+                    - link "Configuration" [ref=e142] [cursor=pointer]:
+                      - /url: "#configuration"
+                  - listitem [ref=e143]:
+                    - link "Supported AI Assistants" [ref=e144] [cursor=pointer]:
+                      - /url: "#supported-ai-assistants"
+                  - listitem [ref=e145]:
+                    - link "Supported LLM Providers" [ref=e146] [cursor=pointer]:
+                      - /url: "#supported-llm-providers"
+                  - listitem [ref=e147]:
+                    - link "Programmatic API" [ref=e148] [cursor=pointer]:
+                      - /url: "#programmatic-api"
+                  - listitem [ref=e149]:
+                    - link "MCP Server" [ref=e150] [cursor=pointer]:
+                      - /url: "#mcp-server"
+                  - listitem [ref=e151]:
+                    - link "Agent System" [ref=e152] [cursor=pointer]:
+                      - /url: "#agent-system"
+                  - listitem [ref=e153]:
+                    - link "Quality Layer" [ref=e154] [cursor=pointer]:
+                      - /url: "#quality-layer"
+                  - listitem [ref=e155]:
+                    - link "Observability" [ref=e156] [cursor=pointer]:
+                      - /url: "#observability"
+                  - listitem [ref=e157]:
+                    - link "Architecture" [ref=e158] [cursor=pointer]:
+                      - /url: "#architecture"
+                - separator [ref=e159]
+                - generic [ref=e160]:
+                  - heading "Installation" [level=2] [ref=e161]
+                  - 'link "Permalink: Installation" [ref=e162] [cursor=pointer]':
+                    - /url: "#installation"
+                - generic [ref=e164]:
+                  - generic [ref=e165]: "# Install globally (recommended — enables `phantomind` CLI)"
+                  - text: npm install -g @phantomind/core
+                  - generic [ref=e166]: "# Or install as a project dependency"
+                  - text: npm install @phantomind/core
+                  - generic [ref=e167]: "# Verify installation"
+                  - text: phantomind --version
+                - paragraph [ref=e168]:
+                  - strong [ref=e169]: "Requirements:"
+                  - text: Node.js ≥ 18
+                - separator [ref=e170]
+                - generic [ref=e171]:
+                  - heading "Quick Start" [level=2] [ref=e172]
+                  - 'link "Permalink: Quick Start" [ref=e173] [cursor=pointer]':
+                    - /url: "#quick-start"
+                - generic [ref=e174]:
+                  - heading "1. Initialize in your project" [level=3] [ref=e175]
+                  - 'link "Permalink: 1. Initialize in your project" [ref=e176] [cursor=pointer]':
+                    - /url: "#1-initialize-in-your-project"
+                - generic [ref=e178]: cd your-project phantomind init
+                - paragraph [ref=e179]: "This creates:"
+                - code [ref=e181]: .phantomind/ SKILLS.md ← Auto-learned project patterns RULES.md ← AI behavior rules schema.json ← Output contracts config.yaml ← PhantomindAI configuration
+                - generic [ref=e182]:
+                  - heading "2. Sync to your AI tools" [level=3] [ref=e183]
+                  - 'link "Permalink: 2. Sync to your AI tools" [ref=e184] [cursor=pointer]':
+                    - /url: "#2-sync-to-your-ai-tools"
+                - generic [ref=e186]: phantomind sync
+                - paragraph [ref=e187]: "Generated adapter files (auto-updated, never edit directly):"
+                - code [ref=e189]: .github/copilot-instructions.md ← GitHub Copilot .cursorrules ← Cursor .clinerules ← Cline .continue/config.json ← Continue .windsurfrules ← Windsurf .zed/settings.json ← Zed .aider.conf.yml ← Aider .claude/CLAUDE.md ← Claude Code CLI AGENTS.md ← OpenAI Codex CLI
+                - generic [ref=e190]:
+                  - heading "3. Use the programmatic API (optional)" [level=3] [ref=e191]
+                  - 'link "Permalink: 3. Use the programmatic API (optional)" [ref=e192] [cursor=pointer]':
+                    - /url: "#3-use-the-programmatic-api-optional"
+                - generic [ref=e194]: "import { phantom } from '@phantomind/core'; await phantom.init(); // Complete with auto-routing across providers const response = await phantom.complete('Refactor this function to use async/await'); // Run an agentic task const result = await phantom.agent('Add input validation to the user registration endpoint'); // Semantic search across codebase const matches = await phantom.search('authentication middleware');"
+                - separator [ref=e195]
+                - generic [ref=e196]:
+                  - heading "CLI Reference" [level=2] [ref=e197]
+                  - 'link "Permalink: CLI Reference" [ref=e198] [cursor=pointer]':
+                    - /url: "#cli-reference"
+                - code [ref=e200]: phantomind [command] [options]
+                - table [ref=e201]:
+                  - rowgroup [ref=e202]:
+                    - row "Command Description" [ref=e203]:
+                      - columnheader "Command" [ref=e204]
+                      - columnheader "Description" [ref=e205]
+                  - rowgroup [ref=e206]:
+                    - row "phantomind init Initialize PhantomindAI in the current project" [ref=e207]:
+                      - cell "phantomind init" [ref=e208]:
+                        - code [ref=e209]: phantomind init
+                      - cell "Initialize PhantomindAI in the current project" [ref=e210]
+                    - row "phantomind learn Scan codebase and regenerate learned project context" [ref=e211]:
+                      - cell "phantomind learn" [ref=e212]:
+                        - code [ref=e213]: phantomind learn
+                      - cell "Scan codebase and regenerate learned project context" [ref=e214]
+                    - row "phantomind sync Sync context to all configured AI assistant adapters" [ref=e215]:
+                      - cell "phantomind sync" [ref=e216]:
+                        - code [ref=e217]: phantomind sync
+                      - cell "Sync context to all configured AI assistant adapters" [ref=e218]
+                    - row "phantomind diff Preview adapter output diffs without writing files" [ref=e219]:
+                      - cell "phantomind diff" [ref=e220]:
+                        - code [ref=e221]: phantomind diff
+                      - cell "Preview adapter output diffs without writing files" [ref=e222]
+                    - row "phantomind context Preview ranked context or search context sections" [ref=e223]:
+                      - cell "phantomind context" [ref=e224]:
+                        - code [ref=e225]: phantomind context
+                      - cell "Preview ranked context or search context sections" [ref=e226]
+                    - row "phantomind compare Compare generated adapter payloads" [ref=e227]:
+                      - cell "phantomind compare" [ref=e228]:
+                        - code [ref=e229]: phantomind compare
+                      - cell "Compare generated adapter payloads" [ref=e230]
+                    - row "phantomind watch Watch project files and refresh context automatically" [ref=e231]:
+                      - cell "phantomind watch" [ref=e232]:
+                        - code [ref=e233]: phantomind watch
+                      - cell "Watch project files and refresh context automatically" [ref=e234]
+                    - row "phantomind hooks Install git hooks to keep context in sync" [ref=e235]:
+                      - cell "phantomind hooks" [ref=e236]:
+                        - code [ref=e237]: phantomind hooks
+                      - cell "Install git hooks to keep context in sync" [ref=e238]
+                    - row "phantomind serve Start the MCP server (stdio or HTTP transport)" [ref=e239]:
+                      - cell "phantomind serve" [ref=e240]:
+                        - code [ref=e241]: phantomind serve
+                      - cell "Start the MCP server (stdio or HTTP transport)" [ref=e242]
+                    - row "phantomind dashboard Start the observability dashboard server" [ref=e243]:
+                      - cell "phantomind dashboard" [ref=e244]:
+                        - code [ref=e245]: phantomind dashboard
+                      - cell "Start the observability dashboard server" [ref=e246]
+                    - row "phantomind eval Test and benchmark LLM provider connections" [ref=e247]:
+                      - cell "phantomind eval" [ref=e248]:
+                        - code [ref=e249]: phantomind eval
+                      - cell "Test and benchmark LLM provider connections" [ref=e250]
+                    - row "phantomind validate [files...] Scan code for secrets, hallucinations, and consistency issues" [ref=e251]:
+                      - cell "phantomind validate [files...]" [ref=e252]:
+                        - code [ref=e253]: phantomind validate [files...]
+                      - cell "Scan code for secrets, hallucinations, and consistency issues" [ref=e254]
+                    - row "phantomind audit View cost reports and audit trail" [ref=e255]:
+                      - cell "phantomind audit" [ref=e256]:
+                        - code [ref=e257]: phantomind audit
+                      - cell "View cost reports and audit trail" [ref=e258]
+                    - row "phantomind stats Display project context statistics" [ref=e259]:
+                      - cell "phantomind stats" [ref=e260]:
+                        - code [ref=e261]: phantomind stats
+                      - cell "Display project context statistics" [ref=e262]
+                    - row "phantomind agent <task> Execute an agentic task from the CLI" [ref=e263]:
+                      - cell "phantomind agent <task>" [ref=e264]:
+                        - code [ref=e265]: phantomind agent <task>
+                      - cell "Execute an agentic task from the CLI" [ref=e266]
+                    - row "phantomind schema [name] List or display schema definitions" [ref=e267]:
+                      - cell "phantomind schema [name]" [ref=e268]:
+                        - code [ref=e269]: phantomind schema [name]
+                      - cell "List or display schema definitions" [ref=e270]
+                - generic [ref=e271]:
+                  - heading "phantomind init" [level=3] [ref=e272]:
+                    - code [ref=e273]: phantomind init
+                  - 'link "Permalink: phantomind init" [ref=e274] [cursor=pointer]':
+                    - /url: "#phantomind-init"
+                - generic [ref=e276]: "phantomind init [options] Options: --provider <name> Optional LLM provider for agent/eval workflows --adapters <list> Space-separated adapter list (e.g. copilot cursor cline) --template <name> auto|default|node-library|node-cli|react-app|nextjs-app --yes Skip interactive prompts"
+                - generic [ref=e277]:
+                  - heading "phantomind learn" [level=3] [ref=e278]:
+                    - code [ref=e279]: phantomind learn
+                  - 'link "Permalink: phantomind learn" [ref=e280] [cursor=pointer]':
+                    - /url: "#phantomind-learn"
+                - generic [ref=e282]: "phantomind learn [options] Options: --sync Run adapter sync after learning --verbose Show detailed output"
+                - generic [ref=e283]:
+                  - heading "phantomind sync" [level=3] [ref=e284]:
+                    - code [ref=e285]: phantomind sync
+                  - 'link "Permalink: phantomind sync" [ref=e286] [cursor=pointer]':
+                    - /url: "#phantomind-sync"
+                - generic [ref=e288]: "phantomind sync [options] Options: --adapters <list> Only sync specific adapters --dry-run Preview changes without writing files --verbose Show per-file diff"
+                - generic [ref=e289]:
+                  - heading "phantomind diff" [level=3] [ref=e290]:
+                    - code [ref=e291]: phantomind diff
+                  - 'link "Permalink: phantomind diff" [ref=e292] [cursor=pointer]':
+                    - /url: "#phantomind-diff"
+                - generic [ref=e294]: "phantomind diff [options] Options: --adapters <list> Only diff specific adapters --verbose Show full diff output"
+                - generic [ref=e295]:
+                  - heading "phantomind context" [level=3] [ref=e296]:
+                    - code [ref=e297]: phantomind context
+                  - 'link "Permalink: phantomind context" [ref=e298] [cursor=pointer]':
+                    - /url: "#phantomind-context"
+                - generic [ref=e300]: "phantomind context [options] Options: --file <path> Rank context for a specific file --search <query> Search across context sections --max-tokens <n> Token budget for preview output --json Emit raw JSON"
+                - generic [ref=e301]:
+                  - heading "phantomind compare" [level=3] [ref=e302]:
+                    - code [ref=e303]: phantomind compare
+                  - 'link "Permalink: phantomind compare" [ref=e304] [cursor=pointer]':
+                    - /url: "#phantomind-compare"
+                - generic [ref=e306]: "phantomind compare [options] Options: --adapters <list> Only compare specific adapters --preview Show generated content preview"
+                - generic [ref=e307]:
+                  - heading "phantomind watch" [level=3] [ref=e308]:
+                    - code [ref=e309]: phantomind watch
+                  - 'link "Permalink: phantomind watch" [ref=e310] [cursor=pointer]':
+                    - /url: "#phantomind-watch"
+                - generic [ref=e312]: "phantomind watch [options] Options: --sync Run sync after each refresh"
+                - generic [ref=e313]:
+                  - heading "phantomind hooks" [level=3] [ref=e314]:
+                    - code [ref=e315]: phantomind hooks
+                  - 'link "Permalink: phantomind hooks" [ref=e316] [cursor=pointer]':
+                    - /url: "#phantomind-hooks"
+                - generic [ref=e318]: "phantomind hooks [options] Options: --force Overwrite existing git hooks"
+                - generic [ref=e319]:
+                  - heading "phantomind dashboard" [level=3] [ref=e320]:
+                    - code [ref=e321]: phantomind dashboard
+                  - 'link "Permalink: phantomind dashboard" [ref=e322] [cursor=pointer]':
+                    - /url: "#phantomind-dashboard"
+                - generic [ref=e324]: "phantomind dashboard [options] Options: --port <n> Server port (default: 3101) --host <host> Server host (default: 127.0.0.1) --ui <path> Path to built dashboard assets --cors Enable CORS for local development --token <token> Require token for API access --token-env <name> Env var containing dashboard token --token-query <q> Optional query parameter name for token auth"
+                - generic [ref=e325]:
+                  - heading "phantomind validate" [level=3] [ref=e326]:
+                    - code [ref=e327]: phantomind validate
+                  - 'link "Permalink: phantomind validate" [ref=e328] [cursor=pointer]':
+                    - /url: "#phantomind-validate"
+                - generic [ref=e330]: "phantomind validate [files...] [options] Options: --no-secrets Skip secret scanning --no-hallucinations Skip hallucination detection --no-consistency Skip consistency checking --fix Auto-fix detected secrets (redaction)"
+                - generic [ref=e331]:
+                  - heading "phantomind audit" [level=3] [ref=e332]:
+                    - code [ref=e333]: phantomind audit
+                  - 'link "Permalink: phantomind audit" [ref=e334] [cursor=pointer]':
+                    - /url: "#phantomind-audit"
+                - generic [ref=e336]: "phantomind audit [options] Options: --period <p> today|week|month|all (default: today) --type <t> dashboard|costs|actions (default: dashboard) --format <f> terminal|markdown|json"
+                - generic [ref=e337]:
+                  - heading "phantomind agent" [level=3] [ref=e338]:
+                    - code [ref=e339]: phantomind agent
+                  - 'link "Permalink: phantomind agent" [ref=e340] [cursor=pointer]':
+                    - /url: "#phantomind-agent"
+                - generic [ref=e342]: "phantomind agent <task> [options] Options: --role <role> architect|implementer|securityReviewer|testWriter|documenter --orchestrate Use multi-role orchestration --roles <list> Roles for orchestration (e.g. architect,implementer,testWriter) --max-steps <n> Maximum agent steps (default: 30)"
+                - separator [ref=e343]
+                - generic [ref=e344]:
+                  - heading "Configuration" [level=2] [ref=e345]
+                  - 'link "Permalink: Configuration" [ref=e346] [cursor=pointer]':
+                    - /url: "#configuration"
+                - paragraph [ref=e347]:
+                  - text: PhantomindAI is configured via
+                  - code [ref=e348]: .phantomind/config.yaml
+                  - text: ":"
+                - generic [ref=e350]:
+                  - generic [ref=e351]: "# .phantomind/config.yaml"
+                  - text: "providers: primary: name: anthropic model: claude-opus-4-5 apiKey: ${ANTHROPIC_API_KEY} fallback: name: openai model: gpt-4o apiKey: ${OPENAI_API_KEY} budget: name: groq model: llama-3.3-70b-versatile apiKey: ${GROQ_API_KEY} adapters: - copilot - cursor - cline - continue - claude-code - codex mcp: enabled: true port: 3333 budget: maxCostPerDay: 5.00 warningAt: 0.80 fallbackOnBudget: budget agent: maxSteps: 30 memory: enabled: true maxEntries: 200 quality: secretScanning: true hallucinationDetection: true dualVerification: false"
+                - generic [ref=e352]:
+                  - heading "Environment Variables" [level=3] [ref=e353]
+                  - 'link "Permalink: Environment Variables" [ref=e354] [cursor=pointer]':
+                    - /url: "#environment-variables"
+                - table [ref=e355]:
+                  - rowgroup [ref=e356]:
+                    - row "Variable Provider" [ref=e357]:
+                      - columnheader "Variable" [ref=e358]
+                      - columnheader "Provider" [ref=e359]
+                  - rowgroup [ref=e360]:
+                    - row "ANTHROPIC_API_KEY Anthropic (Claude)" [ref=e361]:
+                      - cell "ANTHROPIC_API_KEY" [ref=e362]:
+                        - code [ref=e363]: ANTHROPIC_API_KEY
+                      - cell "Anthropic (Claude)" [ref=e364]
+                    - row "OPENAI_API_KEY OpenAI (GPT)" [ref=e365]:
+                      - cell "OPENAI_API_KEY" [ref=e366]:
+                        - code [ref=e367]: OPENAI_API_KEY
+                      - cell "OpenAI (GPT)" [ref=e368]
+                    - row "GEMINI_API_KEY Google Gemini" [ref=e369]:
+                      - cell "GEMINI_API_KEY" [ref=e370]:
+                        - code [ref=e371]: GEMINI_API_KEY
+                      - cell "Google Gemini" [ref=e372]
+                    - row "GROQ_API_KEY Groq" [ref=e373]:
+                      - cell "GROQ_API_KEY" [ref=e374]:
+                        - code [ref=e375]: GROQ_API_KEY
+                      - cell "Groq" [ref=e376]
+                    - row "MISTRAL_API_KEY Mistral" [ref=e377]:
+                      - cell "MISTRAL_API_KEY" [ref=e378]:
+                        - code [ref=e379]: MISTRAL_API_KEY
+                      - cell "Mistral" [ref=e380]
+                    - row "DEEPSEEK_API_KEY DeepSeek" [ref=e381]:
+                      - cell "DEEPSEEK_API_KEY" [ref=e382]:
+                        - code [ref=e383]: DEEPSEEK_API_KEY
+                      - cell "DeepSeek" [ref=e384]
+                    - row "OPENROUTER_API_KEY OpenRouter" [ref=e385]:
+                      - cell "OPENROUTER_API_KEY" [ref=e386]:
+                        - code [ref=e387]: OPENROUTER_API_KEY
+                      - cell "OpenRouter" [ref=e388]
+                - paragraph [ref=e389]:
+                  - text: Provider-backed commands load
+                  - code [ref=e390]: .phantomind/.env
+                  - text: when present. Core flows like
+                  - code [ref=e391]: init
+                  - text: ","
+                  - code [ref=e392]: learn
+                  - text: ","
+                  - code [ref=e393]: sync
+                  - text: ","
+                  - code [ref=e394]: diff
+                  - text: ", and"
+                  - code [ref=e395]: context
+                  - text: do not require API keys.
+                - generic [ref=e396]:
+                  - heading "Dashboard UI" [level=3] [ref=e397]
+                  - 'link "Permalink: Dashboard UI" [ref=e398] [cursor=pointer]':
+                    - /url: "#dashboard-ui"
+                - paragraph [ref=e399]: "If you build the optional Angular dashboard package, PhantomindAI can serve both the API and the static UI:"
+                - generic [ref=e401]: npm run dashboard:build phantomind dashboard
+                - paragraph [ref=e402]:
+                  - text: Without a built UI,
+                  - code [ref=e403]: phantomind dashboard
+                  - text: still starts an API-only observability server.
+                - separator [ref=e404]
+                - generic [ref=e405]:
+                  - heading "Supported AI Assistants" [level=2] [ref=e406]
+                  - 'link "Permalink: Supported AI Assistants" [ref=e407] [cursor=pointer]':
+                    - /url: "#supported-ai-assistants"
+                - table [ref=e408]:
+                  - rowgroup [ref=e409]:
+                    - row "Adapter File Generated Status" [ref=e410]:
+                      - columnheader "Adapter" [ref=e411]
+                      - columnheader "File Generated" [ref=e412]
+                      - columnheader "Status" [ref=e413]
+                  - rowgroup [ref=e414]:
+                    - row "GitHub Copilot .github/copilot-instructions.md ✅" [ref=e415]:
+                      - cell "GitHub Copilot" [ref=e416]
+                      - cell ".github/copilot-instructions.md" [ref=e417]:
+                        - code [ref=e418]: .github/copilot-instructions.md
+                      - cell "✅" [ref=e419]
+                    - row "Cursor .cursorrules ✅" [ref=e420]:
+                      - cell "Cursor" [ref=e421]
+                      - cell ".cursorrules" [ref=e422]:
+                        - code [ref=e423]: .cursorrules
+                      - cell "✅" [ref=e424]
+                    - row "Cline .clinerules ✅" [ref=e425]:
+                      - cell "Cline" [ref=e426]
+                      - cell ".clinerules" [ref=e427]:
+                        - code [ref=e428]: .clinerules
+                      - cell "✅" [ref=e429]
+                    - row "Continue .continue/config.json ✅" [ref=e430]:
+                      - cell "Continue" [ref=e431]
+                      - cell ".continue/config.json" [ref=e432]:
+                        - code [ref=e433]: .continue/config.json
+                      - cell "✅" [ref=e434]
+                    - row "Windsurf .windsurfrules ✅" [ref=e435]:
+                      - cell "Windsurf" [ref=e436]
+                      - cell ".windsurfrules" [ref=e437]:
+                        - code [ref=e438]: .windsurfrules
+                      - cell "✅" [ref=e439]
+                    - row "Zed .zed/settings.json ✅" [ref=e440]:
+                      - cell "Zed" [ref=e441]
+                      - cell ".zed/settings.json" [ref=e442]:
+                        - code [ref=e443]: .zed/settings.json
+                      - cell "✅" [ref=e444]
+                    - row "Aider .aider.conf.yml ✅" [ref=e445]:
+                      - cell "Aider" [ref=e446]
+                      - cell ".aider.conf.yml" [ref=e447]:
+                        - code [ref=e448]: .aider.conf.yml
+                      - cell "✅" [ref=e449]
+                    - row "Claude Code .claude/CLAUDE.md ✅" [ref=e450]:
+                      - cell "Claude Code" [ref=e451]
+                      - cell ".claude/CLAUDE.md" [ref=e452]:
+                        - code [ref=e453]: .claude/CLAUDE.md
+                      - cell "✅" [ref=e454]
+                    - row "OpenAI Codex AGENTS.md ✅" [ref=e455]:
+                      - cell "OpenAI Codex" [ref=e456]
+                      - cell "AGENTS.md" [ref=e457]:
+                        - code [ref=e458]: AGENTS.md
+                      - cell "✅" [ref=e459]
+                - separator [ref=e460]
+                - generic [ref=e461]:
+                  - heading "Supported LLM Providers" [level=2] [ref=e462]
+                  - 'link "Permalink: Supported LLM Providers" [ref=e463] [cursor=pointer]':
+                    - /url: "#supported-llm-providers"
+                - table [ref=e464]:
+                  - rowgroup [ref=e465]:
+                    - row "Provider Models Notes" [ref=e466]:
+                      - columnheader "Provider" [ref=e467]
+                      - columnheader "Models" [ref=e468]
+                      - columnheader "Notes" [ref=e469]
+                  - rowgroup [ref=e470]:
+                    - row "Anthropic claude-opus-4-5, claude-sonnet-4-5, claude-haiku-3-5 Recommended primary" [ref=e471]:
+                      - cell "Anthropic" [ref=e472]:
+                        - strong [ref=e473]: Anthropic
+                      - cell "claude-opus-4-5, claude-sonnet-4-5, claude-haiku-3-5" [ref=e474]
+                      - cell "Recommended primary" [ref=e475]
+                    - row "OpenAI gpt-4o, gpt-4o-mini, o3, o4-mini Excellent fallback" [ref=e476]:
+                      - cell "OpenAI" [ref=e477]:
+                        - strong [ref=e478]: OpenAI
+                      - cell "gpt-4o, gpt-4o-mini, o3, o4-mini" [ref=e479]
+                      - cell "Excellent fallback" [ref=e480]
+                    - row "Google Gemini gemini-2.0-flash, gemini-2.5-pro Best for large context" [ref=e481]:
+                      - cell "Google Gemini" [ref=e482]:
+                        - strong [ref=e483]: Google Gemini
+                      - cell "gemini-2.0-flash, gemini-2.5-pro" [ref=e484]
+                      - cell "Best for large context" [ref=e485]
+                    - row "Groq llama-3.3-70b, mixtral-8x7b Best budget option" [ref=e486]:
+                      - cell "Groq" [ref=e487]:
+                        - strong [ref=e488]: Groq
+                      - cell "llama-3.3-70b, mixtral-8x7b" [ref=e489]
+                      - cell "Best budget option" [ref=e490]
+                    - row "Mistral mistral-large-latest, codestral Strong for code" [ref=e491]:
+                      - cell "Mistral" [ref=e492]:
+                        - strong [ref=e493]: Mistral
+                      - cell "mistral-large-latest, codestral" [ref=e494]
+                      - cell "Strong for code" [ref=e495]
+                    - row "Ollama any local model No API key, fully local" [ref=e496]:
+                      - cell "Ollama" [ref=e497]:
+                        - strong [ref=e498]: Ollama
+                      - cell "any local model" [ref=e499]
+                      - cell "No API key, fully local" [ref=e500]
+                    - row "DeepSeek deepseek-chat, deepseek-reasoner Cost-efficient" [ref=e501]:
+                      - cell "DeepSeek" [ref=e502]:
+                        - strong [ref=e503]: DeepSeek
+                      - cell "deepseek-chat, deepseek-reasoner" [ref=e504]
+                      - cell "Cost-efficient" [ref=e505]
+                    - row "OpenRouter 200+ models Meta-provider" [ref=e506]:
+                      - cell "OpenRouter" [ref=e507]:
+                        - strong [ref=e508]: OpenRouter
+                      - cell "200+ models" [ref=e509]
+                      - cell "Meta-provider" [ref=e510]
+                - generic [ref=e511]:
+                  - heading "Provider Routing" [level=3] [ref=e512]
+                  - 'link "Permalink: Provider Routing" [ref=e513] [cursor=pointer]':
+                    - /url: "#provider-routing"
+                - generic [ref=e515]:
+                  - text: "providers: primary:"
+                  - generic [ref=e516]: "# Highest quality — used by default"
+                  - text: "name: anthropic model: claude-opus-4-5 fallback:"
+                  - generic [ref=e517]: "# Used if primary fails"
+                  - text: "name: openai model: gpt-4o budget:"
+                  - generic [ref=e518]: "# Used when daily cost threshold exceeded"
+                  - text: "name: groq model: llama-3.3-70b-versatile local:"
+                  - generic [ref=e519]: "# Used for offline/sensitive tasks"
+                  - text: "name: ollama model: llama3.2"
+                - separator [ref=e520]
+                - generic [ref=e521]:
+                  - heading "Programmatic API" [level=2] [ref=e522]
+                  - 'link "Permalink: Programmatic API" [ref=e523] [cursor=pointer]':
+                    - /url: "#programmatic-api"
+                - generic [ref=e525]: "import { phantom } from '@phantomind/core'; // Initialize (loads config, connects providers) await phantom.init(); // Get project context (intelligent multi-layer context) const ctx = await phantom.ctx({ maxTokens: 4000 }); // Complete with context injection and auto-routing const response = await phantom.complete('Explain the auth module', { maxTokens: 1000, temperature: 0.3, }); // Complete with intelligent retry on failure const result = await phantom.completeWithRetry('Implement JWT refresh logic'); // Run an agentic task (single role) const agentResult = await phantom.agent('Refactor the payment service', { role: 'implementer', maxSteps: 25, }); // Multi-agent orchestration const orchestrated = await phantom.orchestrate( 'Build a rate limiting middleware', ['architect', 'implementer', 'securityReviewer', 'testWriter'], ); // Semantic search across codebase const matches = await phantom.search('database connection pooling', 5); // returns: Array<{ path, score, snippet }> // Sync adapters await phantom.sync(['copilot', 'cursor'], /* dryRun */ false); // Validate code const { secrets, hallucinations } = await phantom.validate(code, 'auth.ts'); // Cost report const costs = phantom.costs('today'); // 'today' | 'week' | 'month' | 'all' // Analytics dashboard const dashboard = phantom.dashboard(); console.log(dashboard.formatTerminal()); // Learn project patterns const skills = await phantom.learn(); // Save state await phantom.save();"
+                - separator [ref=e526]
+                - generic [ref=e527]:
+                  - heading "MCP Server" [level=2] [ref=e528]
+                  - 'link "Permalink: MCP Server" [ref=e529] [cursor=pointer]':
+                    - /url: "#mcp-server"
+                - paragraph [ref=e530]:
+                  - text: PhantomindAI exposes a
+                  - link "Model Context Protocol" [ref=e531] [cursor=pointer]:
+                    - /url: https://modelcontextprotocol.io
+                  - text: "server providing 9 tools to any MCP-compatible AI assistant:"
+                - generic [ref=e533]: phantomind serve
+                - generic [ref=e534]:
+                  - heading "MCP Tools" [level=3] [ref=e535]
+                  - 'link "Permalink: MCP Tools" [ref=e536] [cursor=pointer]':
+                    - /url: "#mcp-tools"
+                - table [ref=e537]:
+                  - rowgroup [ref=e538]:
+                    - row "Tool Description" [ref=e539]:
+                      - columnheader "Tool" [ref=e540]
+                      - columnheader "Description" [ref=e541]
+                  - rowgroup [ref=e542]:
+                    - row "get_project_context Full project context (skills, rules, schema)" [ref=e543]:
+                      - cell "get_project_context" [ref=e544]:
+                        - code [ref=e545]: get_project_context
+                      - cell "Full project context (skills, rules, schema)" [ref=e546]
+                    - row "search_codebase Semantic search across indexed files" [ref=e547]:
+                      - cell "search_codebase" [ref=e548]:
+                        - code [ref=e549]: search_codebase
+                      - cell "Semantic search across indexed files" [ref=e550]
+                    - row "validate_code Secret + hallucination scan" [ref=e551]:
+                      - cell "validate_code" [ref=e552]:
+                        - code [ref=e553]: validate_code
+                      - cell "Secret + hallucination scan" [ref=e554]
+                    - row "get_schema Retrieve a named JSON/Zod schema" [ref=e555]:
+                      - cell "get_schema" [ref=e556]:
+                        - code [ref=e557]: get_schema
+                      - cell "Retrieve a named JSON/Zod schema" [ref=e558]
+                    - row "list_schemas List all registered schemas" [ref=e559]:
+                      - cell "list_schemas" [ref=e560]:
+                        - code [ref=e561]: list_schemas
+                      - cell "List all registered schemas" [ref=e562]
+                    - row "complete LLM completion via provider router" [ref=e563]:
+                      - cell "complete" [ref=e564]:
+                        - code [ref=e565]: complete
+                      - cell "LLM completion via provider router" [ref=e566]
+                    - row "run_agent Execute an agentic task" [ref=e567]:
+                      - cell "run_agent" [ref=e568]:
+                        - code [ref=e569]: run_agent
+                      - cell "Execute an agentic task" [ref=e570]
+                    - row "get_cost_report Current cost breakdown" [ref=e571]:
+                      - cell "get_cost_report" [ref=e572]:
+                        - code [ref=e573]: get_cost_report
+                      - cell "Current cost breakdown" [ref=e574]
+                    - row "get_audit_log Recent audit entries" [ref=e575]:
+                      - cell "get_audit_log" [ref=e576]:
+                        - code [ref=e577]: get_audit_log
+                      - cell "Recent audit entries" [ref=e578]
+                - generic [ref=e579]:
+                  - heading "MCP Configuration (Claude Desktop / Continue)" [level=3] [ref=e580]
+                  - 'link "Permalink: MCP Configuration (Claude Desktop / Continue)" [ref=e581] [cursor=pointer]':
+                    - /url: "#mcp-configuration-claude-desktop--continue"
+                - generic [ref=e583]:
+                  - text: "{ \"mcpServers\": { \"phantomind\": { \"command\":"
+                  - generic [ref=e584]: "\"npx\""
+                  - text: ", \"args\": ["
+                  - generic [ref=e585]: "\"phantomind\""
+                  - text: ","
+                  - generic [ref=e586]: "\"serve\""
+                  - text: "], \"cwd\":"
+                  - generic [ref=e587]: "\"/path/to/your/project\""
+                  - text: "} } }"
+                - separator [ref=e588]
+                - generic [ref=e589]:
+                  - heading "Agent System" [level=2] [ref=e590]
+                  - 'link "Permalink: Agent System" [ref=e591] [cursor=pointer]':
+                    - /url: "#agent-system"
+                - generic [ref=e592]:
+                  - heading "Roles" [level=3] [ref=e593]
+                  - 'link "Permalink: Roles" [ref=e594] [cursor=pointer]':
+                    - /url: "#roles"
+                - table [ref=e595]:
+                  - rowgroup [ref=e596]:
+                    - row "Role Specialization" [ref=e597]:
+                      - columnheader "Role" [ref=e598]
+                      - columnheader "Specialization" [ref=e599]
+                  - rowgroup [ref=e600]:
+                    - row "architect System design, architecture decisions, dependency planning" [ref=e601]:
+                      - cell "architect" [ref=e602]:
+                        - code [ref=e603]: architect
+                      - cell "System design, architecture decisions, dependency planning" [ref=e604]
+                    - row "implementer Feature implementation, code generation, refactoring" [ref=e605]:
+                      - cell "implementer" [ref=e606]:
+                        - code [ref=e607]: implementer
+                      - cell "Feature implementation, code generation, refactoring" [ref=e608]
+                    - row "securityReviewer Vulnerability scanning, threat modeling, secure coding" [ref=e609]:
+                      - cell "securityReviewer" [ref=e610]:
+                        - code [ref=e611]: securityReviewer
+                      - cell "Vulnerability scanning, threat modeling, secure coding" [ref=e612]
+                    - row "testWriter Unit tests, integration tests, edge cases, mocks" [ref=e613]:
+                      - cell "testWriter" [ref=e614]:
+                        - code [ref=e615]: testWriter
+                      - cell "Unit tests, integration tests, edge cases, mocks" [ref=e616]
+                    - row "documenter API docs, README, inline comments, changelogs" [ref=e617]:
+                      - cell "documenter" [ref=e618]:
+                        - code [ref=e619]: documenter
+                      - cell "API docs, README, inline comments, changelogs" [ref=e620]
+                - generic [ref=e621]:
+                  - heading "Single-Agent Execution" [level=3] [ref=e622]
+                  - 'link "Permalink: Single-Agent Execution" [ref=e623] [cursor=pointer]':
+                    - /url: "#single-agent-execution"
+                - generic [ref=e625]:
+                  - text: phantomind agent
+                  - generic [ref=e626]: "\"Add rate limiting to the API\""
+                  - text: "--role implementer --max-steps 20"
+                - generic [ref=e627]:
+                  - heading "Multi-Agent Orchestration" [level=3] [ref=e628]
+                  - 'link "Permalink: Multi-Agent Orchestration" [ref=e629] [cursor=pointer]':
+                    - /url: "#multi-agent-orchestration"
+                - generic [ref=e631]:
+                  - text: phantomind agent
+                  - generic [ref=e632]: "\"Build OAuth2 integration\""
+                  - text: "--orchestrate \\ --roles architect,implementer,securityReviewer,testWriter"
+                - separator [ref=e633]
+                - generic [ref=e634]:
+                  - heading "Quality Layer" [level=2] [ref=e635]
+                  - 'link "Permalink: Quality Layer" [ref=e636] [cursor=pointer]':
+                    - /url: "#quality-layer"
+                - generic [ref=e637]:
+                  - heading "Secret Scanning" [level=3] [ref=e638]
+                  - 'link "Permalink: Secret Scanning" [ref=e639] [cursor=pointer]':
+                    - /url: "#secret-scanning"
+                - paragraph [ref=e640]: "Detects and redacts API keys, tokens, passwords, and credentials:"
+                - generic [ref=e642]: phantomind validate src/ --secrets
+                - paragraph [ref=e643]: "Detects: AWS keys, GitHub tokens, Stripe keys, OpenAI keys, JWT secrets, PEM certificates, database connection strings, and 20+ other patterns."
+                - generic [ref=e644]:
+                  - heading "Hallucination Detection" [level=3] [ref=e645]
+                  - 'link "Permalink: Hallucination Detection" [ref=e646] [cursor=pointer]':
+                    - /url: "#hallucination-detection"
+                - paragraph [ref=e647]: "Checks AI-generated code for:"
+                - list [ref=e648]:
+                  - listitem [ref=e649]:
+                    - code [ref=e650]: import
+                    - text: statements referencing non-existent packages
+                  - listitem [ref=e651]: References to files that don't exist in the project
+                  - listitem [ref=e652]: Usage of type names not defined in the codebase
+                - generic [ref=e653]:
+                  - heading "Consistency Checking" [level=3] [ref=e654]
+                  - 'link "Permalink: Consistency Checking" [ref=e655] [cursor=pointer]':
+                    - /url: "#consistency-checking"
+                - paragraph [ref=e656]: "Identifies inconsistencies across the codebase:"
+                - list [ref=e657]:
+                  - listitem [ref=e658]: Naming convention violations (camelCase vs snake_case drift)
+                  - listitem [ref=e659]: Mixed async patterns
+                  - listitem [ref=e660]: Architectural boundary violations
+                - generic [ref=e661]:
+                  - heading "Dual-Model Verification" [level=3] [ref=e662]
+                  - 'link "Permalink: Dual-Model Verification" [ref=e663] [cursor=pointer]':
+                    - /url: "#dual-model-verification"
+                - paragraph [ref=e664]: For critical outputs, a second model independently verifies correctness before acceptance.
+                - separator [ref=e665]
+                - generic [ref=e666]:
+                  - heading "Observability" [level=2] [ref=e667]
+                  - 'link "Permalink: Observability" [ref=e668] [cursor=pointer]':
+                    - /url: "#observability"
+                - generic [ref=e669]:
+                  - heading "Cost Tracking" [level=3] [ref=e670]
+                  - 'link "Permalink: Cost Tracking" [ref=e671] [cursor=pointer]':
+                    - /url: "#cost-tracking"
+                - generic [ref=e673]: phantomind audit --type costs --period week
+                - paragraph [ref=e674]: Tracks cost per provider, per model, per day with budget alerts.
+                - generic [ref=e675]:
+                  - heading "Audit Trail" [level=3] [ref=e676]
+                  - 'link "Permalink: Audit Trail" [ref=e677] [cursor=pointer]':
+                    - /url: "#audit-trail"
+                - paragraph [ref=e678]:
+                  - text: All agent actions are logged to
+                  - code [ref=e679]: .phantomind/audit/audit.jsonl
+                  - text: ":"
+                - generic [ref=e681]: phantomind audit --type actions
+                - generic [ref=e682]:
+                  - heading "Analytics Dashboard" [level=3] [ref=e683]
+                  - 'link "Permalink: Analytics Dashboard" [ref=e684] [cursor=pointer]':
+                    - /url: "#analytics-dashboard"
+                - generic [ref=e686]: phantomind audit --type dashboard
+                - paragraph [ref=e687]: "Displays: request count, total cost, success rate, response time, quality events, agent task completion."
+                - separator [ref=e688]
+                - generic [ref=e689]:
+                  - heading "Architecture" [level=2] [ref=e690]
+                  - 'link "Permalink: Architecture" [ref=e691] [cursor=pointer]':
+                    - /url: "#architecture"
+                - code [ref=e693]: packages/core/src/ ├── types.ts ← All shared TypeScript interfaces ├── index.ts ← PhantomMind class + phantom singleton ├── config/ ← Config loading (cosmiconfig, .env, deep-merge) ├── providers/ ← LLM provider abstractions + router ├── context/ ← Project context management + semantic search ├── adapters/ ← AI assistant adapter sync (9 adapters) ├── mcp/ ← MCP Server (9 tools) ├── agent/ ← Agentic execution engine + orchestrator ├── quality/ ← Output quality enforcement ├── schemas/ ← Schema registry (Zod + JSON Schema) ├── templates/ ← SKILLS.md + RULES.md templates ├── observability/ ← Audit, cost, dashboard └── cli/ ← CLI commands (Commander.js)
+                - separator [ref=e694]
+                - generic [ref=e695]:
+                  - heading "Roadmap" [level=2] [ref=e696]
+                  - 'link "Permalink: Roadmap" [ref=e697] [cursor=pointer]':
+                    - /url: "#roadmap"
+                - table [ref=e698]:
+                  - rowgroup [ref=e699]:
+                    - row "Version Features" [ref=e700]:
+                      - columnheader "Version" [ref=e701]
+                      - columnheader "Features" [ref=e702]
+                  - rowgroup [ref=e703]:
+                    - row "v0.1 Context sync, adapter generation, CLI init/sync" [ref=e704]:
+                      - cell "v0.1" [ref=e705]:
+                        - strong [ref=e706]: v0.1
+                      - cell "Context sync, adapter generation, CLI init/sync" [ref=e707]
+                    - row "v0.2 Provider router, budget management, MCP server" [ref=e708]:
+                      - cell "v0.2" [ref=e709]:
+                        - strong [ref=e710]: v0.2
+                      - cell "Provider router, budget management, MCP server" [ref=e711]
+                    - row "v0.3 Agent executor, orchestrator, task queue" [ref=e712]:
+                      - cell "v0.3" [ref=e713]:
+                        - strong [ref=e714]: v0.3
+                      - cell "Agent executor, orchestrator, task queue" [ref=e715]
+                    - row "v0.4 Quality layer (secrets, hallucinations, consistency)" [ref=e716]:
+                      - cell "v0.4" [ref=e717]:
+                        - strong [ref=e718]: v0.4
+                      - cell "Quality layer (secrets, hallucinations, consistency)" [ref=e719]
+                    - row "v0.5 Observability (audit, costs, dashboard)" [ref=e720]:
+                      - cell "v0.5" [ref=e721]:
+                        - strong [ref=e722]: v0.5
+                      - cell "Observability (audit, costs, dashboard)" [ref=e723]
+                    - row "v1.0 Schema registry, templates, stable API" [ref=e724]:
+                      - cell "v1.0" [ref=e725]:
+                        - strong [ref=e726]: v1.0
+                      - cell "Schema registry, templates, stable API" [ref=e727]
+                    - row "v1.x VS Code extension, Git hooks, CI/CD integration" [ref=e728]:
+                      - cell "v1.x" [ref=e729]:
+                        - strong [ref=e730]: v1.x
+                      - cell "VS Code extension, Git hooks, CI/CD integration" [ref=e731]
+                - separator [ref=e732]
+                - generic [ref=e733]:
+                  - heading "License" [level=2] [ref=e734]
+                  - 'link "Permalink: License" [ref=e735] [cursor=pointer]':
+                    - /url: "#license"
+                - paragraph [ref=e736]:
+                  - text: MIT ©
+                  - link "Synaptode" [ref=e737] [cursor=pointer]:
+                    - /url: https://github.com/synaptode
+            - generic [ref=e738]:
+              - heading "Readme" [level=2] [ref=e739]
+              - heading "Keywords" [level=3] [ref=e740]
+              - list [ref=e741]:
+                - listitem [ref=e742]:
+                  - link "ai" [ref=e743] [cursor=pointer]:
+                    - /url: /search?q=keywords:ai
+                - listitem [ref=e744]:
+                  - link "llm" [ref=e745] [cursor=pointer]:
+                    - /url: /search?q=keywords:llm
+                - listitem [ref=e746]:
+                  - link "copilot" [ref=e747] [cursor=pointer]:
+                    - /url: /search?q=keywords:copilot
+                - listitem [ref=e748]:
+                  - link "cursor" [ref=e749] [cursor=pointer]:
+                    - /url: /search?q=keywords:cursor
+                - listitem [ref=e750]:
+                  - link "mcp" [ref=e751] [cursor=pointer]:
+                    - /url: /search?q=keywords:mcp
+                - listitem [ref=e752]:
+                  - link "context" [ref=e753] [cursor=pointer]:
+                    - /url: /search?q=keywords:context
+                - listitem [ref=e754]:
+                  - link "agent" [ref=e755] [cursor=pointer]:
+                    - /url: /search?q=keywords:agent
+                - listitem [ref=e756]:
+                  - link "phantomind" [ref=e757] [cursor=pointer]:
+                    - /url: /search?q=keywords:phantomind
+          - tabpanel
+          - tabpanel
+          - tabpanel "16 Dependencies"
+          - tabpanel "0 Dependents"
+          - tabpanel "5 Versions"
+        - complementary "Package sidebar" [ref=e758]:
+          - heading "Package Sidebar" [level=2] [ref=e759]
+          - heading "Install" [level=3] [ref=e760]
+          - generic [ref=e761]:
+            - img
+            - paragraph [ref=e762]:
+              - generic [ref=e763]:
+                - code [ref=e764]: npm i @phantomind/core
+                - button "Copy install command line" [ref=e765] [cursor=pointer]:
+                  - img
+          - generic [ref=e766]:
+            - heading "Repository" [level=3] [ref=e767]
+            - paragraph [ref=e768]:
+              - link "Repository github.com/synaptode/PhantomMind" [ref=e769] [cursor=pointer]:
+                - /url: https://github.com/synaptode/PhantomMind
+                - img [ref=e771]
+                - text: github.com/synaptode/PhantomMind
+          - generic [ref=e774]:
+            - heading "Homepage" [level=3] [ref=e775]
+            - paragraph [ref=e776]:
+              - link "Homepage github.com/synaptode/PhantomMind#readme" [ref=e777] [cursor=pointer]:
+                - /url: https://github.com/synaptode/PhantomMind#readme
+                - img [ref=e778]
+                - text: github.com/synaptode/PhantomMind#readme
+          - generic [ref=e780]:
+            - heading "Version" [level=3] [ref=e781]
+            - paragraph [ref=e783]: 0.1.5
+          - generic [ref=e784]:
+            - heading "License" [level=3] [ref=e785]
+            - paragraph [ref=e786]: MIT
+          - generic [ref=e787]:
+            - heading "Unpacked Size" [level=3] [ref=e788]
+            - paragraph [ref=e789]: 830 kB
+          - generic [ref=e790]:
+            - heading "Total Files" [level=3] [ref=e791]
+            - paragraph [ref=e792]: "310"
+          - generic [ref=e793]:
+            - heading "Last publish" [level=3] [ref=e794]
+            - paragraph [ref=e795]:
+              - time [ref=e796]: 6 hours ago
+          - generic [ref=e797]:
+            - heading "Collaborators" [level=3] [ref=e798]
+            - list "Collaborators" [ref=e799]:
+              - listitem [ref=e800]:
+                - link "synaptode" [ref=e802] [cursor=pointer]:
+                  - /url: /~synaptode
+                  - img "synaptode" [ref=e803]
+          - generic [ref=e804]:
+            - link "Analyze security with Socket" [ref=e805] [cursor=pointer]:
+              - /url: https://socket.dev/npm/package/%40phantomind%2Fcore
+              - img [ref=e806]
+              - strong [ref=e808]: Analyze security
+              - text: with Socket
+            - link "Check bundle size" [ref=e809] [cursor=pointer]:
+              - /url: https://bundlephobia.com/package/%40phantomind%2Fcore
+              - img [ref=e810]
+              - strong [ref=e812]: Check bundle size
+            - link "View package health" [ref=e813] [cursor=pointer]:
+              - /url: https://snyk.io/advisor/npm-package/%40phantomind%2Fcore
+              - img [ref=e814]
+              - strong [ref=e816]: View package health
+            - link "Explore dependencies" [ref=e817] [cursor=pointer]:
+              - /url: https://npmgraph.js.org/?q=%40phantomind%2Fcore
+              - img [ref=e818]
+              - strong [ref=e820]: Explore dependencies
+          - link "Report malware" [ref=e822] [cursor=pointer]:
+            - /url: /support?inquire=security&security-inquire=malware&package=%40phantomind%2Fcore&version=0.1.5
+            - img [ref=e823]
+            - strong [ref=e825]: Report
+            - text: malware
+    - contentinfo [ref=e826]:
+      - heading "Footer" [level=2] [ref=e827]
+      - generic [ref=e828]:
+        - generic [ref=e829]:
+          - link "Visit npm GitHub page" [ref=e831] [cursor=pointer]:
+            - /url: https://github.com/npm
+            - img [ref=e832]
+          - link "GitHub" [ref=e836] [cursor=pointer]:
+            - /url: https://github.com
+            - img [ref=e837]
+        - generic [ref=e839]:
+          - heading "Support" [level=3] [ref=e840]
+          - list "Support" [ref=e841]:
+            - listitem [ref=e842]:
+              - link "Help" [ref=e843] [cursor=pointer]:
+                - /url: https://docs.npmjs.com
+            - listitem [ref=e844]:
+              - link "Advisories" [ref=e845] [cursor=pointer]:
+                - /url: https://github.com/advisories
+            - listitem [ref=e846]:
+              - link "Status" [ref=e847] [cursor=pointer]:
+                - /url: http://status.npmjs.org/
+            - listitem [ref=e848]:
+              - link "Contact npm" [ref=e849] [cursor=pointer]:
+                - /url: /support
+        - generic [ref=e850]:
+          - heading "Company" [level=3] [ref=e851]
+          - list "Company" [ref=e852]:
+            - listitem [ref=e853]:
+              - link "About" [ref=e854] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e855]:
+              - link "Blog" [ref=e856] [cursor=pointer]:
+                - /url: https://github.blog/tag/npm/
+            - listitem [ref=e857]:
+              - link "Press" [ref=e858] [cursor=pointer]:
+                - /url: /press
+        - generic [ref=e859]:
+          - heading "Terms & Policies" [level=3] [ref=e860]
+          - list "Terms & Policies" [ref=e861]:
+            - listitem [ref=e862]:
+              - link "Policies" [ref=e863] [cursor=pointer]:
+                - /url: /policies/
+            - listitem [ref=e864]:
+              - link "Terms of Use" [ref=e865] [cursor=pointer]:
+                - /url: /policies/terms
+            - listitem [ref=e866]:
+              - link "Code of Conduct" [ref=e867] [cursor=pointer]:
+                - /url: /policies/conduct
+            - listitem [ref=e868]:
+              - link "Privacy" [ref=e869] [cursor=pointer]:
+                - /url: /policies/privacy
+  - generic [ref=e871]: Viewing @phantomind/core version 0.1.5

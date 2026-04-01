@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Claude Code Adapter
+ * PhantomindAI — Claude Code Adapter
  */
 
 import { BaseAdapter } from './base.js';

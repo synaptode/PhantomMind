@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Live Codebase Embedder
+ * PhantomindAI — Live Codebase Embedder
  * Creates and maintains embeddings of project source files for semantic search.
  */
 

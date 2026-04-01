@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Gemini Provider (Google)
+ * PhantomindAI — Gemini Provider (Google)
  */
 
 import { BaseProvider } from './base.js';

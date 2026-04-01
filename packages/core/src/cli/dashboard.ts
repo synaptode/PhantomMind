@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — CLI Dashboard Command
+ * PhantomindAI — CLI Dashboard Command
  * Starts the observability dashboard server.
  */
 
@@ -23,7 +23,7 @@ export async function dashboardCommand(
 ): Promise<void> {
   const chalk = (await import('chalk')).default;
 
-  console.log(chalk.bold.cyan('\n📈 PhantomMindAI — Observability Dashboard\n'));
+  console.log(chalk.bold.cyan('\n📈 PhantomindAI — Observability Dashboard\n'));
 
   const port = Number.parseInt(options.port ?? '3101', 10);
   const host = options.host ?? '127.0.0.1';

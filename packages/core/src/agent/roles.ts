@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Agent Roles
+ * PhantomindAI — Agent Roles
  * Persona & role system with specialized system prompts.
  */
 

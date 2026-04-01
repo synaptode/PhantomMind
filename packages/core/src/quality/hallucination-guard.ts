@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Hallucination Guard
+ * PhantomindAI — Hallucination Guard
  * Pre-write check that detects when AI references non-existent entities.
  */
 

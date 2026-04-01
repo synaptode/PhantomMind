@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Analytics Dashboard
+ * PhantomindAI — Analytics Dashboard
  * Terminal-based usage analytics and metrics visualization.
  */
 
@@ -76,7 +76,7 @@ export class AnalyticsDashboard {
 
     const lines = [
       `┌${hr}┐`,
-      `│${'  PhantomMindAI Dashboard'.padEnd(width)}│`,
+      `│${'  PhantomindAI Dashboard'.padEnd(width)}│`,
       `├${hr}┤`,
       `│${'  OVERVIEW'.padEnd(width)}│`,
       `│  Requests: ${String(m.overview.totalRequests).padEnd(width - 14)}│`,
@@ -109,7 +109,7 @@ export class AnalyticsDashboard {
   formatMarkdown(period: CostPeriod = 'today'): string {
     const m = this.getMetrics(period);
 
-    return `# PhantomMindAI Analytics Dashboard
+    return `# PhantomindAI Analytics Dashboard
 
 ## Overview
 | Metric | Value |

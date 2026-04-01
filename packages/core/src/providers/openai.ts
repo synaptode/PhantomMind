@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — OpenAI Provider
+ * PhantomindAI — OpenAI Provider
  */
 
 import { BaseProvider } from './base.js';
