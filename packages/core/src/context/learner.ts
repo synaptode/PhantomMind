@@ -32,6 +32,13 @@ export interface TechStackInfo {
   projectType: string;
   entryPoints: string[];
   scripts: Record<string, string>;
+  // UI/UX Stack
+  uiFrameworks: string[];
+  componentLibraries: string[];
+  stylingLibraries: string[];
+  formLibraries: string[];
+  stateManagement: string[];
+  a11yLibraries: string[];
 }
 
 interface LearningState {
@@ -53,6 +60,12 @@ export const EMPTY_TECH_STACK: TechStackInfo = {
   projectType: 'unknown',
   entryPoints: [],
   scripts: {},
+  uiFrameworks: [],
+  componentLibraries: [],
+  stylingLibraries: [],
+  formLibraries: [],
+  stateManagement: [],
+  a11yLibraries: [],
 };
 
 export class ContextLearner {
@@ -208,19 +221,18 @@ export class ContextLearner {
     lines.push(`- **Project Type**: ${ts.projectType}`);
     lines.push('');
 
-    // Key Scripts
-    if (Object.keys(ts.scripts).length > 0) {
-      lines.push('## Key Commands');
+    // UI/UX Stack
+    if (ts.uiFrameworks.length || ts.componentLibraries.length || ts.stylingLibraries.length || ts.formLibraries.length || ts.stateManagement.length || ts.a11yLibraries.length) {
+      lines.push('## UI/UX Stack');
       lines.push('');
-      const importantScripts = ['build', 'dev', 'start', 'test', 'lint', 'format', 'typecheck'];
-      for (const key of importantScripts) {
-        if (ts.scripts[key]) {
-          lines.push(`- \`npm run ${key}\` → \`${ts.scripts[key]}\``);
-        }
-      }
+      if (ts.uiFrameworks.length) lines.push(`- **UI Frameworks**: ${ts.uiFrameworks.join(', ')}`);
+      if (ts.componentLibraries.length) lines.push(`- **Component Libraries**: ${ts.componentLibraries.join(', ')}`);
+      if (ts.stylingLibraries.length) lines.push(`- **Styling**: ${ts.stylingLibraries.join(', ')}`);
+      if (ts.formLibraries.length) lines.push(`- **Form Management**: ${ts.formLibraries.join(', ')}`);
+      if (ts.stateManagement.length) lines.push(`- **State Management**: ${ts.stateManagement.join(', ')}`);
+      if (ts.a11yLibraries.length) lines.push(`- **Accessibility**: ${ts.a11yLibraries.join(', ')}`);
       lines.push('');
     }
-
     // Entry Points
     if (ts.entryPoints.length > 0) {
       lines.push('## Entry Points');
@@ -374,6 +386,59 @@ export class ContextLearner {
         if (allDeps['redis'] || allDeps['ioredis']) ts.databases.push('Redis');
         if (allDeps['better-sqlite3'] || allDeps['sql.js']) ts.databases.push('SQLite');
 
+        // UI Frameworks
+        if (allDeps['react']) ts.uiFrameworks.push('React');
+        if (allDeps['vue']) ts.uiFrameworks.push('Vue');
+        if (allDeps['@angular/core']) ts.uiFrameworks.push('Angular');
+        if (allDeps['svelte']) ts.uiFrameworks.push('Svelte');
+        if (allDeps['solid-js']) ts.uiFrameworks.push('Solid.js');
+        if (allDeps['preact']) ts.uiFrameworks.push('Preact');
+
+        // Component Libraries
+        if (allDeps['@mui/material'] || allDeps['@material-ui/core']) ts.componentLibraries.push('Material UI (MUI)');
+        if (allDeps['@chakra-ui/react'] || allDeps['chakra-ui']) ts.componentLibraries.push('Chakra UI');
+        if (allDeps['antd']) ts.componentLibraries.push('Ant Design');
+        if (allDeps['shadcn-ui'] || pkg.dependencies?.['shadcn-ui'] !== undefined) ts.componentLibraries.push('shadcn/ui');
+        if (allDeps['@headlessui/react']) ts.componentLibraries.push('Headless UI');
+        if (allDeps['@radix-ui/react-dialog'] || allDeps['@radix-ui/primitives']) ts.componentLibraries.push('Radix UI');
+        if (allDeps['react-bootstrap']) ts.componentLibraries.push('React Bootstrap');
+        if (allDeps['bootstrap']) ts.componentLibraries.push('Bootstrap');
+        if (allDeps['tailwindcss']) ts.componentLibraries.push('Headless (Tailwind-first)');
+
+        // Styling Libraries
+        if (allDeps['tailwindcss']) ts.stylingLibraries.push('Tailwind CSS');
+        if (allDeps['styled-components']) ts.stylingLibraries.push('Styled Components');
+        if (allDeps['emotion']) ts.stylingLibraries.push('Emotion');
+        if (allDeps['@emotion/react']) ts.stylingLibraries.push('Emotion');
+        if (allDeps['sass'] || allDeps['node-sass']) ts.stylingLibraries.push('Sass');
+        if (allDeps['less']) ts.stylingLibraries.push('Less');
+        if (allDeps['postcss']) ts.stylingLibraries.push('PostCSS');
+        if (allDeps['panda-css']) ts.stylingLibraries.push('Panda CSS');
+        if (allDeps['windy-css'] || allDeps['unocss']) ts.stylingLibraries.push('UnoCSS');
+
+        // Form Libraries
+        if (allDeps['react-hook-form']) ts.formLibraries.push('React Hook Form');
+        if (allDeps['formik']) ts.formLibraries.push('Formik');
+        if (allDeps['react-final-form']) ts.formLibraries.push('React Final Form');
+        if (allDeps['vue-form-composition'] || allDeps['vee-validate']) ts.formLibraries.push('Vee Validate (Vue)');
+
+        // State Management
+        if (allDeps['redux'] || allDeps['@reduxjs/toolkit']) ts.stateManagement.push('Redux');
+        if (allDeps['zustand']) ts.stateManagement.push('Zustand');
+        if (allDeps['jotai']) ts.stateManagement.push('Jotai');
+        if (allDeps['recoil']) ts.stateManagement.push('Recoil');
+        if (allDeps['mobx'] || allDeps['mobx-react']) ts.stateManagement.push('MobX');
+        if (allDeps['pinia']) ts.stateManagement.push('Pinia (Vue)');
+        if (allDeps['vuex']) ts.stateManagement.push('Vuex (Vue)');
+        if (allDeps['ngxs'] || allDeps['@ngxs/store']) ts.stateManagement.push('NGXS (Angular)');
+        if (allDeps['@tanstack/react-query'] || allDeps['react-query']) ts.stateManagement.push('TanStack Query (React)');
+
+        // Accessibility Libraries
+        if (allDeps['@axe-core/react'] || allDeps['axe-core']) ts.a11yLibraries.push('Axe DevTools');
+        if (allDeps['jsx-a11y']) ts.a11yLibraries.push('jsx-a11y (ESLint)');
+        if (allDeps['pa11y']) ts.a11yLibraries.push('pa11y');
+        if (allDeps['@vitest/ui'] || allDeps['@testing-library/jest-dom']) ts.a11yLibraries.push('Testing Library A11y');
+
         // Runtime
         ts.runtime.push('Node.js');
         if (pkg.engines?.node) ts.nodeVersion = pkg.engines.node;
@@ -429,6 +494,12 @@ export class ContextLearner {
     ts.linters = [...new Set(ts.linters)];
     ts.databases = [...new Set(ts.databases)];
     ts.runtime = [...new Set(ts.runtime)];
+    ts.uiFrameworks = [...new Set(ts.uiFrameworks)];
+    ts.componentLibraries = [...new Set(ts.componentLibraries)];
+    ts.stylingLibraries = [...new Set(ts.stylingLibraries)];
+    ts.formLibraries = [...new Set(ts.formLibraries)];
+    ts.stateManagement = [...new Set(ts.stateManagement)];
+    ts.a11yLibraries = [...new Set(ts.a11yLibraries)];
 
     return ts;
   }

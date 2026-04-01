@@ -1,7 +1,9 @@
 {
   "name": "phantomind-monorepo",
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "npm -w @phantomind/contracts run build && npm -w @phantomind/core run build",
     "build:contracts": "npm -w @phantomind/contracts run build",
@@ -15,5 +17,6 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "version": "0.1.0"
 }

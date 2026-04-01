@@ -40,7 +40,7 @@ export async function learnCommand(
 
     console.log('');
     console.log(chalk.bold('  Detected:'));
-    for (const line of techLines.slice(0, 8)) {
+    for (const line of techLines.slice(0, 12)) {
       console.log(`  ${chalk.green('✓')} ${line.replace('- **', '').replace('**:', ':').replace('**', '')}`);
     }
     if (patternCount > 0) {
