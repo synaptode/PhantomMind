@@ -189,7 +189,7 @@ export class PhantomMind {
     roles?: AgentRole[],
   ): Promise<import('./agent/orchestrator.js').OrchestrationResult> {
     this.ensureInit();
-    const orchestrator = new AgentOrchestrator(this.router, this.contextEngine, this.projectRoot);
+    const orchestrator = new AgentOrchestrator(this.router, this.contextEngine, this.projectRoot, this.config);
     return orchestrator.orchestrate(task, roles);
   }
 

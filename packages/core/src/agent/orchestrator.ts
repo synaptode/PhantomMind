@@ -6,7 +6,7 @@
 import { EventEmitter } from 'eventemitter3';
 import type { ProviderRouter } from '../providers/router.js';
 import type { ContextEngine } from '../context/engine.js';
-import type { AgentRole, AgentConfig, AgentResult, TokenUsage } from '../types.js';
+import type { AgentRole, AgentConfig, AgentResult, TokenUsage, PhantomConfig } from '../types.js';
 import { AgentExecutor } from './executor.js';
 import { AgentMemory } from './memory.js';
 import { getRoleDefinition } from './roles.js';
@@ -43,17 +43,20 @@ export class AgentOrchestrator extends EventEmitter {
   private router: ProviderRouter;
   private contextEngine: ContextEngine;
   private projectRoot: string;
+  private phantomConfig?: PhantomConfig;
   private memory: AgentMemory;
 
   constructor(
     router: ProviderRouter,
     contextEngine: ContextEngine,
     projectRoot: string,
+    phantomConfig?: PhantomConfig,
   ) {
     super();
     this.router = router;
     this.contextEngine = contextEngine;
     this.projectRoot = projectRoot;
+    this.phantomConfig = phantomConfig;
     this.memory = new AgentMemory(projectRoot);
   }
 
@@ -91,6 +94,7 @@ export class AgentOrchestrator extends EventEmitter {
           this.contextEngine,
           this.projectRoot,
           config,
+          this.phantomConfig,
         );
 
         const result = await executor.run(task);

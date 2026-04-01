@@ -43,7 +43,7 @@ export async function agentCommand(
       const roles = (options.roles ?? ['architect', 'implementer', 'securityReviewer']) as AgentRole[];
       spinner.text = `Orchestrating ${roles.join(', ')}...`;
 
-      const orchestrator = new AgentOrchestrator(router, contextEngine, projectRoot);
+      const orchestrator = new AgentOrchestrator(router, contextEngine, projectRoot, config);
 
       orchestrator.on('orchestration:phase', ({ phase }: any) => {
         spinner.text = `Phase: ${phase}...`;
@@ -76,7 +76,7 @@ export async function agentCommand(
       const executor = new AgentExecutor(router, contextEngine, projectRoot, {
         role,
         maxSteps: options.maxSteps ?? 30,
-      });
+      }, config);
 
       executor.on('agent:step', ({ step }: any) => {
         spinner.text = `Step: ${step.action}...`;
