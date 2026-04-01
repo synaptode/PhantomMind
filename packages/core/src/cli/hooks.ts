@@ -23,7 +23,10 @@ export async function hooksCommand(projectRoot: string, options: HooksOptions): 
   const hooksDir = join(projectRoot, '.git', 'hooks');
 
   if (!existsSync(join(projectRoot, '.git'))) {
-    throw new Error('Git repository not found. Initialize git before installing hooks.');
+    console.error(chalk.red('\n✖ Git repository not found.\n'));
+    console.error(chalk.dim('  Run `git init` first, then re-run `phantomind hooks`.'));
+    console.error('');
+    process.exit(1);
   }
 
   await mkdir(hooksDir, { recursive: true });

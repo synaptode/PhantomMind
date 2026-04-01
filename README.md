@@ -141,10 +141,11 @@ phantomind [command] [options]
 | `phantomind eval` | Test and benchmark LLM provider connections |
 | `phantomind validate [files...]` | Scan code for secrets, hallucinations, and consistency issues |
 | `phantomind audit` | View cost reports and audit trail |
-| `phantomind dashboard` | Start the observability dashboard server |
 | `phantomind stats` | Display project context statistics |
 | `phantomind agent <task>` | Execute an agentic task from the CLI |
 | `phantomind schema [name]` | List or display schema definitions |
+| `phantomind check` | Run pre-flight doctor: verify setup, adapters, provider & security |
+| `phantomind upgrade` | Self-update to the latest published version |
 
 ### `phantomind init`
 
@@ -281,6 +282,31 @@ Options:
   --token-env <n> Env var containing API token (default: PHANTOMIND_DASHBOARD_TOKEN)
   --token-query <n> Optional query param name for token
 ```
+
+### `phantomind check`
+
+```bash
+phantomind check [options]
+
+Options:
+  --fix               Attempt to auto-fix simple issues
+  --json              Output results as JSON (useful for CI)
+```
+
+Runs a comprehensive pre-flight diagnostic:
+- Node.js version compatibility
+- `.phantomind/` directory and key files (config, SKILLS.md, RULES.md)
+- API key / provider configuration
+- Adapter sync status
+- Security (`.env` gitignored)
+
+### `phantomind upgrade`
+
+```bash
+phantomind upgrade
+```
+
+Checks npm for the latest `@phantomind/core` release and upgrades the global installation automatically.
 
 ### `phantomind agent`
 

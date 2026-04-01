@@ -241,4 +241,24 @@ program
     }
   });
 
+// phantomind check
+program
+  .command('check')
+  .description('Run pre-flight checks on PhantomindAI setup (doctor)')
+  .option('--fix', 'Attempt to auto-fix simple issues')
+  .option('--json', 'Output results as JSON')
+  .action(async (options) => {
+    const { checkCommand } = await import('./check.js');
+    await checkCommand(process.cwd(), options);
+  });
+
+// phantomind upgrade
+program
+  .command('upgrade')
+  .description('Upgrade PhantomindAI to the latest version')
+  .action(async () => {
+    const { upgradeCommand } = await import('./upgrade.js');
+    await upgradeCommand();
+  });
+
 program.parse();
