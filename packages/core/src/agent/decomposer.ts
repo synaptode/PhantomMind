@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Task Decomposer
+ * PhantomindAI — Task Decomposer
  * Prompt chaining & automatic task decomposition.
  * Breaks large tasks into analysis → planning → write → validate chains.
  */

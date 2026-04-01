@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Agent Memory
+ * PhantomindAI — Agent Memory
  * Cross-session persistent agent memory for learning from past interactions.
  */
 

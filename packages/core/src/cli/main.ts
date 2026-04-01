@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * PhantomMindAI — CLI Entry Point
+ * PhantomindAI — CLI Entry Point
  * Universal AI development enhancement layer.
  */
 
@@ -25,13 +25,13 @@ const program = new Command();
 
 program
   .name('phantomind')
-  .description('🔮 PhantomMindAI — Universal AI Development Enhancement Layer')
+  .description('🔮 PhantomindAI — Universal AI Development Enhancement Layer')
   .version(getVersion());
 
 // phantomind init
 program
   .command('init')
-  .description('Initialize PhantomMindAI in your project')
+  .description('Initialize PhantomindAI in your project')
   .option('-a, --adapters <adapters...>', 'Target adapters (copilot, cursor, cline, etc.)')
   .option('-p, --provider <provider>', 'Primary LLM provider')
   .option('-m, --model <model>', 'Default model to use')

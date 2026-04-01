@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Cline Adapter
+ * PhantomindAI — Cline Adapter
  */
 
 import { BaseAdapter } from './base.js';

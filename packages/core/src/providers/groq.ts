@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Groq Provider (fast inference)
+ * PhantomindAI — Groq Provider (fast inference)
  */
 
 import { BaseProvider } from './base.js';

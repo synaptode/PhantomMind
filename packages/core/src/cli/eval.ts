@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — CLI Eval Command
+ * PhantomindAI — CLI Eval Command
  * Evaluate and test AI provider connections.
  */
 
@@ -19,7 +19,7 @@ export async function evalCommand(
   const chalk = (await import('chalk')).default;
   const ora = (await import('ora')).default;
 
-  console.log(chalk.bold.cyan('\n🧪 PhantomMindAI — Provider Evaluation\n'));
+  console.log(chalk.bold.cyan('\n🧪 PhantomindAI — Provider Evaluation\n'));
 
   const spinner = ora('Loading configuration...').start();
 
@@ -46,7 +46,7 @@ export async function evalCommand(
     spinner.succeed(`Connected to ${providerName}`);
 
     // Run test prompt
-    const testPrompt = options.prompt ?? 'Say "PhantomMindAI is ready!" in one short sentence.';
+    const testPrompt = options.prompt ?? 'Say "PhantomindAI is ready!" in one short sentence.';
     const model = resolvedConfig.model;
 
     console.log('');

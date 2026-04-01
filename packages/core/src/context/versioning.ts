@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Context Versioning
+ * PhantomindAI — Context Versioning
  * Track changes to context files with git-like versioning.
  */
 

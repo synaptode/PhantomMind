@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Anomaly Detector
+ * PhantomindAI — Anomaly Detector
  * Real-time monitoring of agent behavior to detect stuck loops, thrashing, etc.
  */
 
@@ -42,6 +42,26 @@ export class AnomalyDetector {
 
     if (file) {
       this.fileAccessCounts.set(file, (this.fileAccessCounts.get(file) ?? 0) + 1);
+    }
+
+    // Prune entries older than 2 windows to prevent unbounded memory growth
+    const cutoff = Date.now() - this.windowMs * 2;
+    if (this.actions[0]?.timestamp < cutoff) {
+      const keepFrom = this.actions.findIndex(a => a.timestamp >= cutoff);
+      if (keepFrom > 0) {
+        this.actions = this.actions.slice(keepFrom);
+        this.fileAccessCounts.clear();
+        for (const a of this.actions) {
+          if (a.file) {
+            this.fileAccessCounts.set(a.file, (this.fileAccessCounts.get(a.file) ?? 0) + 1);
+          }
+        }
+      }
+    }
+
+    // Keep token history bounded to last 100 entries
+    if (this.tokenHistory.length > 100) {
+      this.tokenHistory = this.tokenHistory.slice(-100);
     }
   }
 

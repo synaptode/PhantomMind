@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Provider Router & Factory
+ * PhantomindAI — Provider Router & Factory
  * Handles provider creation, automatic fallback, and budget-aware routing.
  */
 

@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Core Type Definitions
+ * PhantomindAI — Core Type Definitions
  */
 
 import { z } from 'zod';

@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Cost Tracker
+ * PhantomindAI — Cost Tracker
  * Real-time cost tracking per provider/model with budget enforcement.
  */
 

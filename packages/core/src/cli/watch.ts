@@ -30,7 +30,7 @@ function shouldIgnore(path: string): boolean {
 export async function watchCommand(projectRoot: string, options: WatchOptions): Promise<void> {
   const chalk = (await import('chalk')).default;
 
-  console.log(chalk.bold.cyan('\n👀 PhantomMindAI — Watch Mode\n'));
+  console.log(chalk.bold.cyan('\n👀 PhantomindAI — Watch Mode\n'));
   console.log(chalk.dim('Watching project files. Press Ctrl+C to stop.'));
   console.log('');
 

@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Aider Adapter
+ * PhantomindAI — Aider Adapter
  */
 
 import { BaseAdapter } from './base.js';

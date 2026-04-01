@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Base Adapter
+ * PhantomindAI — Base Adapter
  */
 
 import { readFile } from 'node:fs/promises';

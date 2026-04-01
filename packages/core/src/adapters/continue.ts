@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Continue Adapter
+ * PhantomindAI — Continue Adapter
  */
 
 import { BaseAdapter } from './base.js';
@@ -22,7 +22,7 @@ export class ContinueAdapter extends BaseAdapter {
       customCommands: [
         {
           name: 'phantomind-context',
-          description: 'Inject PhantomMindAI project context',
+          description: 'Inject PhantomindAI project context',
           prompt: skills || 'No project context available.',
         },
       ],

@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — DeepSeek Provider
+ * PhantomindAI — DeepSeek Provider
  */
 
 import { BaseProvider } from './base.js';

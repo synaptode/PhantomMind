@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Retry Intelligence
+ * PhantomindAI — Retry Intelligence
  * 5 strategies: decompose, add-schema, switch-provider, add-grounding, escalate.
  */
 

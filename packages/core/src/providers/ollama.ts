@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Ollama Provider (local models)
+ * PhantomindAI — Ollama Provider (local models)
  */
 
 import { BaseProvider } from './base.js';

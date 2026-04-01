@@ -19,7 +19,7 @@ export async function compareCommand(projectRoot: string, options: CompareOption
   const rules = await readFile(join(projectRoot, config.context.rules), 'utf-8').catch(() => '');
   const schema = await readFile(join(projectRoot, config.context.schema), 'utf-8').catch(() => '');
 
-  console.log(chalk.bold.cyan('\n⚖️ PhantomMindAI — Adapter Compare\n'));
+  console.log(chalk.bold.cyan('\n⚖️ PhantomindAI — Adapter Compare\n'));
 
   for (const adapterName of adapterNames) {
     const adapter = getAdapter(adapterName);

@@ -1,8 +1,8 @@
 # @phantomind/contracts
 
-Shared TypeScript domain contracts for PhantomMindAI.
+Shared TypeScript domain contracts for PhantomindAI.
 
-This package provides the public type definitions used across the PhantomMindAI ecosystem — consumed by `@phantomind/core` and the Angular observability dashboard.
+This package provides the public type definitions used across the PhantomindAI ecosystem — consumed by `@phantomind/core` and the Angular observability dashboard.
 
 ## Install
 

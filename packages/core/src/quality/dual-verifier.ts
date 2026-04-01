@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Dual-Model Verifier
+ * PhantomindAI — Dual-Model Verifier
  * Verify critical outputs with a second model from a different provider.
  */
 

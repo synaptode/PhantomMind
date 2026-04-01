@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — OpenRouter Provider (universal gateway)
+ * PhantomindAI — OpenRouter Provider (universal gateway)
  */
 
 import { BaseProvider } from './base.js';
@@ -24,7 +24,7 @@ export class OpenRouterProvider extends BaseProvider {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.apiKey}`,
-        'X-Title': 'PhantomMindAI',
+        'X-Title': 'PhantomindAI',
       },
       body: JSON.stringify({
         model: this.config.model,
@@ -65,7 +65,7 @@ export class OpenRouterProvider extends BaseProvider {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.apiKey}`,
-        'X-Title': 'PhantomMindAI',
+        'X-Title': 'PhantomindAI',
       },
       body: JSON.stringify({
         model: this.config.model,

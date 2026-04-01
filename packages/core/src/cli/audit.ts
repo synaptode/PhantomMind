@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — CLI Audit Command
+ * PhantomindAI — CLI Audit Command
  * View audit trail and cost reports.
  */
 
@@ -21,7 +21,7 @@ export async function auditCommand(
   const chalk = (await import('chalk')).default;
   const ora = (await import('ora')).default;
 
-  console.log(chalk.bold.cyan('\n📊 PhantomMindAI — Audit & Analytics\n'));
+  console.log(chalk.bold.cyan('\n📊 PhantomindAI — Audit & Analytics\n'));
 
   const spinner = ora('Loading audit data...').start();
 

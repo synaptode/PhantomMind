@@ -1,8 +1,8 @@
-# 🔮 PhantomMindAI
+# 🔮 PhantomindAI
 
 **Universal AI Development Enhancement Layer**
 
-> *"You already pay for Copilot, Cursor, or Claude. PhantomMindAI makes what you already have 10x more effective."*
+> *"You already pay for Copilot, Cursor, or Claude. PhantomindAI makes what you already have 10x more effective."*
 
 [![npm version](https://img.shields.io/npm/v/@phantomind/core.svg)](https://www.npmjs.com/package/@phantomind/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -12,11 +12,11 @@
 
 ---
 
-## What is PhantomMindAI?
+## What is PhantomindAI?
 
-PhantomMindAI solves the **context amnesia problem**: AI assistants forget everything about your project every session, every context switch, and every time a new team member onboards.
+PhantomindAI solves the **context amnesia problem**: AI assistants forget everything about your project every session, every context switch, and every time a new team member onboards.
 
-PhantomMindAI provides:
+PhantomindAI provides:
 
 - **Persistent context layer** — one source of truth (`SKILLS.md`, `RULES.md`, `schema.json`) synced to every AI assistant automatically
 - **Universal LLM abstraction** — one API for Anthropic, OpenAI, Gemini, Groq, Mistral, Ollama, DeepSeek, and OpenRouter, with automatic fallback and budget routing
@@ -77,7 +77,7 @@ This creates:
   SKILLS.md       ← Auto-learned project patterns
   RULES.md        ← AI behavior rules
   schema.json     ← Output contracts
-  config.yaml     ← PhantomMindAI configuration
+  config.yaml     ← PhantomindAI configuration
 ```
 
 ### 2. Sync to your AI tools
@@ -127,7 +127,7 @@ phantomind [command] [options]
 
 | Command | Description |
 |---------|-------------|
-| `phantomind init` | Initialize PhantomMindAI in the current project |
+| `phantomind init` | Initialize PhantomindAI in the current project |
 | `phantomind learn` | Scan codebase and regenerate learned project context |
 | `phantomind sync` | Sync context to all configured AI assistant adapters |
 | `phantomind diff` | Preview adapter output diffs without writing files |
@@ -281,7 +281,7 @@ Options:
 
 ## Configuration
 
-PhantomMindAI is configured via `.phantomind/config.yaml`:
+PhantomindAI is configured via `.phantomind/config.yaml`:
 
 ```yaml
 # .phantomind/config.yaml
@@ -345,7 +345,7 @@ Provider-backed commands load `.phantomind/.env` when present. Core flows like `
 
 ### Dashboard UI
 
-If you build the optional Angular dashboard package, PhantomMindAI can serve both the API and the static UI:
+If you build the optional Angular dashboard package, PhantomindAI can serve both the API and the static UI:
 
 ```bash
 npm run dashboard:build
@@ -465,7 +465,7 @@ await phantom.save();
 
 ## MCP Server
 
-PhantomMindAI exposes a [Model Context Protocol](https://modelcontextprotocol.io) server providing 9 tools to any MCP-compatible AI assistant:
+PhantomindAI exposes a [Model Context Protocol](https://modelcontextprotocol.io) server providing 9 tools to any MCP-compatible AI assistant:
 
 ```bash
 phantomind serve

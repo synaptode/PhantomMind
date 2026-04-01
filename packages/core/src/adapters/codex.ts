@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — OpenAI Codex CLI Adapter
+ * PhantomindAI — OpenAI Codex CLI Adapter
  *
  * Generates AGENTS.md — the instruction file read by the OpenAI Codex CLI
  * when running in a project directory.

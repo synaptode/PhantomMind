@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Task Queue & Scheduler
+ * PhantomindAI — Task Queue & Scheduler
  * Manages task queue with priority, scheduling, and cron support.
  */
 

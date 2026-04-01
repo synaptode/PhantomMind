@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — CLI Validate Command
+ * PhantomindAI — CLI Validate Command
  * Validate code output for quality issues.
  */
 
@@ -25,7 +25,7 @@ export async function validateCommand(
   const ora = (await import('ora')).default;
   const fastGlob = (await import('fast-glob')).default;
 
-  console.log(chalk.bold.cyan('\n🔍 PhantomMindAI — Code Validation\n'));
+  console.log(chalk.bold.cyan('\n🔍 PhantomindAI — Code Validation\n'));
 
   const spinner = ora('Scanning files...').start();
   let totalIssues = 0;

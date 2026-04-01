@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Secret Scanner
+ * PhantomindAI — Secret Scanner
  * Detect and prevent secrets, credentials, and sensitive data in code.
  */
 

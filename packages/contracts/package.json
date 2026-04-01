@@ -1,7 +1,7 @@
 {
   "name": "@phantomind/contracts",
   "version": "0.1.0",
-  "description": "PhantomMindAI shared domain contracts — types for the observability dashboard API",
+  "description": "PhantomindAI shared domain contracts — types for the observability dashboard API",
   "keywords": ["phantomind", "ai", "contracts", "types", "observability", "dashboard"],
   "author": "Synaptode",
   "license": "MIT",

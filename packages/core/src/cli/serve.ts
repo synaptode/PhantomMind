@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — CLI Serve Command
+ * PhantomindAI — CLI Serve Command
  * Starts the MCP server for AI tool integration.
  */
 
@@ -15,7 +15,7 @@ export async function serveCommand(
 ): Promise<void> {
   const chalk = (await import('chalk')).default;
 
-  console.log(chalk.bold.cyan('\n🌐 PhantomMindAI — MCP Server\n'));
+  console.log(chalk.bold.cyan('\n🌐 PhantomindAI — MCP Server\n'));
 
   try {
     const { startMCPServer } = await import('../mcp/index.js');

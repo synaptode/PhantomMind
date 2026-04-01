@@ -1,4 +1,4 @@
-# PhantomMindAI — Makefile
+# PhantomindAI — Makefile
 # Universal AI Development Enhancement Layer
 
 .PHONY: all build dev test clean rebuild typecheck lint run install help \
@@ -33,7 +33,7 @@ all: build
 
 ## build: Compile TypeScript → dist/
 build:
-	@echo "$(CYAN)$(BOLD)⚙  Building PhantomMindAI...$(RESET)"
+	@echo "$(CYAN)$(BOLD)⚙  Building PhantomindAI...$(RESET)"
 	@$(NPM) run build
 	@echo "$(GREEN)✓ Build complete → $(DIST)/$(RESET)"
 
@@ -103,7 +103,7 @@ $(DIST)/cli/main.js: $(shell find $(SRC) -name '*.ts' 2>/dev/null)
 
 # ── Convenience CLI Targets ──────────────────────────────────────────────────
 
-## init: Initialize PhantomMindAI in the current project
+## init: Initialize PhantomindAI in the current project
 init:
 	@$(MAKE) run CMD="init"
 
@@ -213,7 +213,7 @@ bump-minor:
 ## help: Show this help message
 help:
 	@echo ""
-	@echo "$(BOLD)$(CYAN)🔮 PhantomMindAI — Available Make Targets$(RESET)"
+	@echo "$(BOLD)$(CYAN)🔮 PhantomindAI — Available Make Targets$(RESET)"
 	@echo "$(DIM)──────────────────────────────────────────────────────$(RESET)"
 	@echo ""
 	@echo "$(BOLD)BUILD$(RESET)"

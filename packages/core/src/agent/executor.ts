@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Agent Executor
+ * PhantomindAI — Agent Executor
  * Multi-step agentic task execution with human checkpoints.
  */
 
@@ -10,6 +10,7 @@ import type { ContextEngine } from '../context/engine.js';
 import { AnomalyDetector } from '../quality/anomaly.js';
 import { SecretScanner } from '../quality/secret-scanner.js';
 import { HallucinationGuard } from '../quality/hallucination-guard.js';
+import { DualVerifier } from '../quality/dual-verifier.js';
 import type {
   AgentConfig,
   AgentRole,
@@ -19,6 +20,7 @@ import type {
   DecisionEntry,
   TokenUsage,
   HumanCheckpointConfig,
+  PhantomConfig,
 } from '../types.js';
 import { getRoleSystemPrompt } from './roles.js';
 
@@ -33,6 +35,7 @@ export class AgentExecutor extends EventEmitter {
   private anomalyDetector: AnomalyDetector;
   private secretScanner: SecretScanner;
   private hallucinationGuard: HallucinationGuard;
+  private dualVerifier?: DualVerifier;
   private projectRoot: string;
   private config: AgentConfig;
   private checkpointHandler?: CheckpointHandler;
@@ -42,6 +45,7 @@ export class AgentExecutor extends EventEmitter {
     contextEngine: ContextEngine,
     projectRoot: string,
     config: AgentConfig,
+    phantomConfig?: PhantomConfig,
   ) {
     super();
     this.router = router;
@@ -51,6 +55,9 @@ export class AgentExecutor extends EventEmitter {
     this.anomalyDetector = new AnomalyDetector();
     this.secretScanner = new SecretScanner();
     this.hallucinationGuard = new HallucinationGuard(projectRoot);
+    if (phantomConfig?.quality?.dualVerification) {
+      this.dualVerifier = new DualVerifier(router, contextEngine, phantomConfig);
+    }
   }
 
   /**
@@ -206,6 +213,16 @@ Provide the output for this step. If writing code, provide the full file content
             );
             if (hallucinations.length > 0) {
               this.emit('quality:hallucination-detected', { step, hallucinations });
+            }
+
+            // Dual-model verification
+            if (this.dualVerifier) {
+              const verification = await this.dualVerifier.verify(
+                stepResponse.content,
+                description,
+                planItem.target,
+              );
+              this.emit('quality:dual-verification', { step, verification });
             }
           }
 

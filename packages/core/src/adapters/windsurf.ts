@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Windsurf Adapter
+ * PhantomindAI — Windsurf Adapter
  */
 
 import { BaseAdapter } from './base.js';

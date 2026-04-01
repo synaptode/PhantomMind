@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Main Entry Point
+ * PhantomindAI — Main Entry Point
  * Universal AI Development Enhancement Layer
  *
  * @example
@@ -74,7 +74,7 @@ export class PhantomMind {
   }
 
   /**
-   * Initialize PhantomMindAI
+   * Initialize PhantomindAI
    */
   async init(configOverride?: Partial<PhantomConfig>): Promise<void> {
     this.config = await loadConfig(this.projectRoot);
@@ -114,7 +114,7 @@ export class PhantomMind {
 
   private ensureInit(): void {
     if (!this.initialized) {
-      throw new Error('PhantomMindAI not initialized. Call phantom.init() first.');
+      throw new Error('PhantomindAI not initialized. Call phantom.init() first.');
     }
   }
 
@@ -177,7 +177,7 @@ export class PhantomMind {
     const executor = new AgentExecutor(this.router, this.contextEngine, this.projectRoot, {
       role: options?.role ?? 'implementer',
       maxSteps: options?.maxSteps ?? 30,
-    });
+    }, this.config);
     return executor.run(task);
   }
 

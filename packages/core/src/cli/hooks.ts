@@ -29,7 +29,7 @@ export async function hooksCommand(projectRoot: string, options: HooksOptions): 
   await mkdir(hooksDir, { recursive: true });
   const script = getHookScript();
 
-  console.log(chalk.bold.cyan('\n🪝 PhantomMindAI — Git Hooks\n'));
+  console.log(chalk.bold.cyan('\n🪝 PhantomindAI — Git Hooks\n'));
 
   for (const hookName of HOOK_FILES) {
     const hookPath = join(hooksDir, hookName);

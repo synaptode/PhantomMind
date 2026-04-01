@@ -17,7 +17,7 @@ export async function contextCommand(
   const engine = new ContextEngine(config, projectRoot);
   const maxTokens = options.maxTokens ? parseInt(options.maxTokens, 10) : 3000;
 
-  console.log(chalk.bold.cyan('\n🧠 PhantomMindAI — Context Preview\n'));
+  console.log(chalk.bold.cyan('\n🧠 PhantomindAI — Context Preview\n'));
 
   if (options.search) {
     const sections = await engine.searchContext(options.search, 8);

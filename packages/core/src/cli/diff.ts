@@ -10,7 +10,7 @@ export async function diffCommand(projectRoot: string, options: DiffOptions): Pr
   const chalk = (await import('chalk')).default;
   const ora = (await import('ora')).default;
 
-  console.log(chalk.bold.cyan('\n🧾 PhantomMindAI — Adapter Diff\n'));
+  console.log(chalk.bold.cyan('\n🧾 PhantomindAI — Adapter Diff\n'));
 
   const spinner = ora('Calculating adapter diffs...').start();
 

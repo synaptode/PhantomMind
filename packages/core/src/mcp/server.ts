@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — MCP Server
+ * PhantomindAI — MCP Server
  * Model Context Protocol server with all project-aware tools.
  */
 
@@ -43,7 +43,7 @@ export class PhantomMCPServer {
       tools: [
         {
           name: 'get_project_context',
-          description: 'Get the full project context including architecture, conventions, and rules from PhantomMindAI. Returns SKILLS.md + RULES.md content, semantically ranked for the current file.',
+          description: 'Get the full project context including architecture, conventions, and rules from PhantomindAI. Returns SKILLS.md + RULES.md content, semantically ranked for the current file.',
           inputSchema: {
             type: 'object' as const,
             properties: {

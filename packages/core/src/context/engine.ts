@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Smart Context Engine
+ * PhantomindAI — Smart Context Engine
  * Semantic ranking of context layers based on current file/task relevance.
  */
 

@@ -1,5 +1,5 @@
 /**
- * PhantomMindAI — Cursor Adapter
+ * PhantomindAI — Cursor Adapter
  */
 
 import { BaseAdapter } from './base.js';
