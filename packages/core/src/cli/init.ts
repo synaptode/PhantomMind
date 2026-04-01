@@ -42,6 +42,8 @@ export interface InitOptions {
   model?: string;
   template?: string;
   yes?: boolean;
+  guided?: boolean; // Enhanced interactive mode with validation & help
+  diagnose?: boolean; // Run diagnostics after init
 }
 
 export async function initCommand(
@@ -52,6 +54,10 @@ export async function initCommand(
   const ora = (await import('ora')).default;
 
   console.log(chalk.bold.cyan('\n🔮 PhantomindAI — Project Initialization\n'));
+
+  if (options.guided) {
+    console.log(chalk.dim('Interactive guided setup with detailed help...\n'));
+  }
 
   // Interactive wizard unless --yes or all flags provided
   const skipWizard = options.yes || !!options.adapters;

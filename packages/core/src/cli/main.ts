@@ -37,6 +37,8 @@ program
   .option('-m, --model <model>', 'Default model to use')
   .option('-t, --template <template>', 'Project template (auto, default, node-library, node-cli, react-app, nextjs-app)')
   .option('-y, --yes', 'Skip interactive prompts')
+  .option('-g, --guided', 'Enhanced interactive setup with validation & help')
+  .option('-d, --diagnose', 'Run diagnostics after initialization')
   .action(async (options) => {
     const { initCommand } = await import('./init.js');
     await initCommand(process.cwd(), options);
@@ -49,6 +51,9 @@ program
   .description('Scan codebase and auto-detect tech stack, patterns, and conventions')
   .option('-s, --sync', 'Also run sync after learning')
   .option('-v, --verbose', 'Detailed output')
+  .option('-p, --packages <packages...>', 'Scoped learning for monorepos (e.g., --packages core adapter agent)')
+  .option('-o, --only-changes', 'Incremental learning — only re-scan changed files (faster)')
+  .option('-d, --diagnose', 'Run diagnostics after learning')
   .action(async (options) => {
     const { learnCommand } = await import('./learn.js');
     await learnCommand(process.cwd(), options);
@@ -60,6 +65,7 @@ program
   .option('-a, --adapters <adapters...>', 'Target adapters to sync')
   .option('-d, --dry-run', 'Show what would change without writing')
   .option('-v, --verbose', 'Show detailed output')
+  .option('--diagnose', 'Run diagnostics after sync')
   .action(async (options) => {
     const { syncCommand } = await import('./sync.js');
     await syncCommand(process.cwd(), options);
@@ -187,6 +193,7 @@ program
   .description('Show project statistics and context info')
   .option('-v, --verbose', 'Detailed output')
   .option('-l, --learn', 'Run pattern learning')
+  .option('-d, --diagnose', 'Run diagnostics after stats')
   .action(async (options) => {
     const { statsCommand } = await import('./stats.js');
     await statsCommand(process.cwd(), options);

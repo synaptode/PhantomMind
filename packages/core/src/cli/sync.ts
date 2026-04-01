@@ -1,6 +1,11 @@
 /**
  * PhantomindAI — CLI Sync Command
  * Generates and syncs adapter configurations for all AI tools.
+ *
+ * Features:
+ * - Sync to multiple adapters (Copilot, Cursor, Cline, Continue, Windsurf, etc.)
+ * - Dry-run mode to preview changes
+ * - --diagnose flag for troubleshooting
  */
 
 import type { PhantomConfig } from '../types.js';
@@ -12,6 +17,7 @@ export interface SyncOptions {
   adapters?: string[];
   dryRun?: boolean;
   verbose?: boolean;
+  diagnose?: boolean; // Run troubleshoot after sync
 }
 
 export async function syncCommand(
@@ -23,7 +29,7 @@ export async function syncCommand(
 
   console.log(chalk.bold.cyan('\n🔄 PhantomindAI — Sync Adapters\n'));
 
-  const spinner = ora('Loading configuration...').start();
+  let spinner = ora('Loading configuration...').start();
 
   try {
     const config = await loadConfig(projectRoot);
@@ -70,6 +76,12 @@ export async function syncCommand(
       chalk.green(`✅ Synced ${successCount}/${results.length} adapters successfully`),
     );
     console.log('');
+
+    // Run diagnostics if requested
+    if (options.diagnose) {
+      const { troubleshootCommand } = await import('./troubleshoot.js');
+      await troubleshootCommand(projectRoot, {});
+    }
   } catch (error) {
     spinner.fail('Sync failed');
     console.error((error as Error).message);

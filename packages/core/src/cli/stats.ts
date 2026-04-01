@@ -1,16 +1,25 @@
 /**
  * PhantomindAI — CLI Stats Command
- * Display project statistics and context info.
+ * Display project statistics, context info, and health insights.
+ *
+ * Features:
+ * - Context layers and token analysis
+ * - Project health scoring (testing, TypeScript, docs, patterns, security, performance)
+ * - Learned patterns and tech stack
+ * - Configuration summary
+ * - --diagnose flag for troubleshooting
  */
 
 import { loadConfig } from '../config/loader.js';
 import { ContextEngine } from '../context/engine.js';
 import { CodebaseEmbedder } from '../context/embedder.js';
 import { ContextLearner } from '../context/learner.js';
+import { HealthScorer } from './health-scorer.js';
 
 export interface StatsOptions {
   verbose?: boolean;
   learn?: boolean;
+  diagnose?: boolean; // Run troubleshoot after stats
 }
 
 export async function statsCommand(
@@ -22,7 +31,7 @@ export async function statsCommand(
 
   console.log(chalk.bold.cyan('\n📈 PhantomindAI — Project Stats\n'));
 
-  const spinner = ora('Analyzing project...').start();
+  let spinner = ora('Analyzing project...').start();
 
   try {
     const config = await loadConfig(projectRoot);
@@ -36,6 +45,11 @@ export async function statsCommand(
     spinner.text = 'Analyzing codebase...';
     const embedder = new CodebaseEmbedder(projectRoot);
     await embedder.build();
+
+    // Health insights
+    spinner.text = 'Scoring project health...';
+    const healthScorer = new HealthScorer(projectRoot);
+    const healthReport = await healthScorer.analyze();
 
     spinner.stop();
 
@@ -52,6 +66,30 @@ export async function statsCommand(
 
     console.log(chalk.bold('Codebase Index:'));
     console.log(`  Status: built`);
+    console.log('');
+
+    // Health insights summary
+    console.log(chalk.bold('Project Health:'));
+    console.log(`  Overall Score: ${chalk.bold(healthReport.projectMaturityScore)}/100`);
+    console.log(`  Status: ${
+      healthReport.projectMaturityScore >= 80 ? chalk.green('Excellent') :
+      healthReport.projectMaturityScore >= 60 ? chalk.yellow('Good') :
+      healthReport.projectMaturityScore >= 40 ? chalk.yellow('Fair') :
+      chalk.red('Needs Work')
+    }`);
+    console.log('');
+
+    // Show top 3 insights (sorted by lowest score)
+    const topInsights = healthReport.insights.slice(0, 3);
+    console.log(chalk.dim('  Top Areas for Improvement:'));
+    for (const insight of topInsights) {
+      const scoreColor = insight.score >= 70 ? chalk.green : insight.score >= 50 ? chalk.yellow : chalk.red;
+      console.log(`  ${chalk.dim('└')} ${insight.title} (${scoreColor(insight.score)}/100)`);
+      console.log(`     ${chalk.dim(insight.message)}`);
+      if (insight.recommendations.length > 0) {
+        console.log(`     ${chalk.dim('→ ' + insight.recommendations[0])}`);
+      }
+    }
     console.log('');
 
     // Learn patterns
@@ -80,6 +118,13 @@ export async function statsCommand(
     console.log(`  MCP Server:       ${config.mcp?.enabled ? 'enabled' : 'disabled'}`);
     console.log(`  Budget (daily):   ${config.budget?.maxCostPerDay ? `$${config.budget.maxCostPerDay}` : 'unlimited'}`);
     console.log('');
+
+    // Diagnostics if requested
+    if (options.diagnose) {
+      console.log('');
+      const { troubleshootCommand } = await import('./troubleshoot.js');
+      await troubleshootCommand(projectRoot, {});
+    }
   } catch (error) {
     spinner.fail('Stats collection failed');
     console.error(chalk.red((error as Error).message));
